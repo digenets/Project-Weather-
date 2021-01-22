@@ -1,0 +1,3 @@
+/home/yulia/Dropbox/HSE/C/project/Project-Weather-/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/home/yulia/Dropbox/HSE/C/project/Project-Weather-/cmake-build-debug/CMakeFiles/edit_cache.dir
+/home/yulia/Dropbox/HSE/C/project/Project-Weather-/cmake-build-debug/CMakeFiles/Project_Weather_.dir
