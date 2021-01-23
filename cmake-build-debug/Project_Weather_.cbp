@@ -108,6 +108,9 @@
 		<Unit filename="/home/yulia/Dropbox/HSE/C/project/Project-Weather-/wind.h">
 			<Option target="Project_Weather_"/>
 		</Unit>
+		<Unit filename="/home/yulia/Dropbox/HSE/C/project/Project-Weather-/wind_constants.h">
+			<Option target="Project_Weather_"/>
+		</Unit>
 		<Unit filename="/home/yulia/Dropbox/HSE/C/project/Project-Weather-/CMakeLists.txt">
 			<Option virtualFolder="CMake Files\"/>
 		</Unit>

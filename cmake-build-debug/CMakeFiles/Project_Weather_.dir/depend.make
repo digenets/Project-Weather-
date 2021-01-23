@@ -13,6 +13,7 @@ CMakeFiles/Project_Weather_.dir/main.c.o: ../temperature.h
 CMakeFiles/Project_Weather_.dir/main.c.o: ../test.h
 CMakeFiles/Project_Weather_.dir/main.c.o: ../weather.h
 CMakeFiles/Project_Weather_.dir/main.c.o: ../wind.h
+CMakeFiles/Project_Weather_.dir/main.c.o: ../wind_constants.h
 
 CMakeFiles/Project_Weather_.dir/weather.c.o: ../weather.c
 

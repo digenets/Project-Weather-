@@ -1,12 +1,14 @@
 #include <stdlib.h>
 #include <locale.h>
 #include <uchar.h>
+#include <time.h>
 #include "weather.h"
 #include "date.h"
 #include "temperature.h"
 #include "wind.h"
 #include "base.h"
 #include "test.h"
+#include "wind_constants.h"
 
 #define INPUT_MAX_LEN 200
 #define TEST "test"
@@ -87,19 +89,132 @@ WEATHER* ParseInput(FILE* file, int strings_number) {
     return parsed;
 }
 
+StringArray ConvertWindDirection(StringArray directions) {
+    StringArray result = CreateStringArray(directions.size);
+    for (int i = 0; i < directions.size; ++i) {
+        if (strcmp(directions.array[i], "С") == 0) {
+            result.array[i] = "северный";
+        } else if (strcmp(directions.array[i], "Ю") == 0) {
+            result.array[i] = "южный";
+        } else if (strcmp(directions.array[i], "З") == 0) {
+            result.array[i] = "западный";
+        } else if (strcmp(directions.array[i], "В") == 0) {
+            result.array[i] = "восточный";
+        } else if (strcmp(directions.array[i], "С-З") == 0) {
+            result.array[i] = "северо-западный";
+        } else if (strcmp(directions.array[i], "С-В") == 0) {
+            result.array[i] = "северо-восточный";
+        } else if (strcmp(directions.array[i], "Ю-З") == 0) {
+            result.array[i] = "юго-западный";
+        } else if (strcmp(directions.array[i], "Ю-В") == 0) {
+            result.array[i] = "юго-восточный";
+        }
+    }
+    return result;
+}
+
+void WriteAboutWind(FILE* output_file, WEATHER weather) {
+    WIND wind = weather.wind;
+
+    // если ветер есть - "Ветер восточный 3-5 м/с с порывами до 5-7 м/с"
+    if (wind.speed_min_val != 0) {
+        fprintf(output_file, "Ветер ");
+
+        // направление ветра
+        StringArray wind_dir_text = ConvertWindDirection(wind.direction);
+        // если направление ветра задаётся одной буквой
+        if (wind_dir_text.size == 1) {
+            fprintf(output_file, "%s ", wind_dir_text.array[0]); // "восточный "
+        } else {
+            for (int i = 0; i < wind.direction.size; ++i) { // "юго-восточный, юго-западный "
+                fprintf(output_file, "%s", wind_dir_text.array[i]);
+                if (i == wind.direction.size - 1) {
+                    fprintf(output_file, " ");
+                } else {
+                    fprintf(output_file, ", ");
+                }
+            }
+        }
+
+        // скорость
+        fprintf(output_file, "%d", wind.speed_min_val);
+        if (wind.speed_max_val != -1) {
+            fprintf(output_file, "-%d", wind.speed_max_val);
+        }
+        fprintf(output_file, " м/с ");
+
+        // порывы
+        fprintf(output_file, "с порывами до ");
+        fprintf(output_file, "%d", wind.gusts_min_val);
+        if (wind.gusts_max_val != -1) {
+            fprintf(output_file, "-%d", wind.gusts_max_val);
+        }
+        fprintf(output_file, " м/с. ");
+    }
+
+    // формируем комментарий в зависимости от средней скорости ветра
+    int average = 0;
+    if (wind.speed_max_val == -1) {
+        average = wind.speed_min_val;
+    } else {
+        average = (wind.speed_min_val + wind.speed_max_val) / 2;
+    }
+
+    if (average == 0) {
+        int index = rand() % comments_wind_0().size;
+        fprintf(output_file, "%s ", comments_wind_0().array[index]);
+    } else if (average > 0 && average <= 3) {
+        int index = rand() % comments_wind_1_3().size;
+        fprintf(output_file, "%s ", comments_wind_1_3().array[index]);
+    } else if (average > 3 && average <= 5) {
+        int index = rand() % comments_wind_3_5().size;
+        fprintf(output_file, "%s ", comments_wind_3_5().array[index]);
+    } else if (average > 5 && average <= 8) {
+        int index = rand() % comments_wind_5_8().size;
+        fprintf(output_file, "%s ", comments_wind_5_8().array[index]);
+    } else if (average > 8 && average <= 14) {
+        int index = rand() % comments_wind_8_14().size;
+        fprintf(output_file, "%s ", comments_wind_8_14().array[index]);
+    } else if (average > 14 && average <= 17) {
+        int index = rand() % comments_wind_14_17().size;
+        fprintf(output_file, "%s ", comments_wind_14_17().array[index]);
+    } else if (average > 17 && average <= 20) {
+        int index = rand() % comments_wind_17_20().size;
+        fprintf(output_file, "%s ", comments_wind_17_20().array[index]);
+    } else if (average > 20 && average <= 25) {
+        int index = rand() % comments_wind_20_25().size;
+        fprintf(output_file, "%s ", comments_wind_20_25().array[index]);
+    } else if (average > 25) {
+        int index = rand() % comments_wind_more_than_25().size;
+        fprintf(output_file, "%s ", comments_wind_more_than_25().array[index]);
+    }
+    fprintf(output_file, "\n");
+}
+
+// todo 4) Ветер. Сила порывов. "Ветер восточный 3-5 м/с с порывами до 9 м/с"
+// todo 6) Словарь для осадков с вариативностью.
+
 int main(int argc, char** argv) {
     setlocale(LC_ALL, "ru-RU.utf8");
+    srand(time(0));
+    rand();
 
-    if (argc > 2 && strcmp(argv[2], TEST) == 0) {
+    if (argc > 3 && strcmp(argv[3], TEST) == 0) {
         Test();
     }
 
     char* path = argv[1];
     FILE* input_file = fopen(path, "r");
-    int str_number = 0;
-    fscanf(input_file, "%d\n", &str_number);
-    WEATHER* weather = ParseInput(input_file, str_number);
+    int weather_str_number = 0;
+    fscanf(input_file, "%d\n", &weather_str_number);
+    WEATHER* weather = ParseInput(input_file, weather_str_number);
+
+    FILE* output_file = fopen(argv[2], "a");
+    for (int i = 0; i < weather_str_number; ++i) {
+        WriteAboutWind(output_file, weather[i]);
+    }
 
     fclose(input_file);
+    fclose(output_file);
     return 0;
 }

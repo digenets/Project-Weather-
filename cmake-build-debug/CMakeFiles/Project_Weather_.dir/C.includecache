@@ -10,10 +10,6 @@
 stdlib.h
 -
 
-/home/yulia/Dropbox/HSE/C/project/Project-Weather-/base.c
-base.h
-/home/yulia/Dropbox/HSE/C/project/Project-Weather-/base.h
-
 /home/yulia/Dropbox/HSE/C/project/Project-Weather-/base.h
 string.h
 -
@@ -33,6 +29,8 @@ locale.h
 -
 uchar.h
 -
+time.h
+-
 weather.h
 /home/yulia/Dropbox/HSE/C/project/Project-Weather-/weather.h
 date.h
@@ -45,6 +43,8 @@ base.h
 /home/yulia/Dropbox/HSE/C/project/Project-Weather-/base.h
 test.h
 /home/yulia/Dropbox/HSE/C/project/Project-Weather-/test.h
+wind_constants.h
+/home/yulia/Dropbox/HSE/C/project/Project-Weather-/wind_constants.h
 
 /home/yulia/Dropbox/HSE/C/project/Project-Weather-/temperature.h
 
@@ -61,6 +61,10 @@ wind.h
 /home/yulia/Dropbox/HSE/C/project/Project-Weather-/wind.h
 
 /home/yulia/Dropbox/HSE/C/project/Project-Weather-/wind.h
+base.h
+/home/yulia/Dropbox/HSE/C/project/Project-Weather-/base.h
+
+/home/yulia/Dropbox/HSE/C/project/Project-Weather-/wind_constants.h
 base.h
 /home/yulia/Dropbox/HSE/C/project/Project-Weather-/base.h
 
