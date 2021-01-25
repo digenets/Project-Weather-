@@ -8,107 +8,129 @@
 		<Option virtualFolders="CMake Files\;"/>
 		<Build>
 			<Target title="all">
-				<Option working_dir="/home/yulia/Dropbox/HSE/C/project/Project-Weather-/cmake-build-debug"/>
+				<Option working_dir="C:/Users/igor/Project-Weather-/cmake-build-debug"/>
 				<Option type="4"/>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j4 -f &quot;/home/yulia/Dropbox/HSE/C/project/Project-Weather-/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
-					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/yulia/Dropbox/HSE/C/project/Project-Weather-/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j4 -f &quot;/home/yulia/Dropbox/HSE/C/project/Project-Weather-/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j4 -f &quot;/home/yulia/Dropbox/HSE/C/project/Project-Weather-/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-				</MakeCommands>
-			</Target>
-			<Target title="rebuild_cache">
-				<Option working_dir="/home/yulia/Dropbox/HSE/C/project/Project-Weather-/cmake-build-debug"/>
-				<Option type="4"/>
-				<MakeCommands>
-					<Build command="/usr/bin/make -j4 -f &quot;/home/yulia/Dropbox/HSE/C/project/Project-Weather-/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
-					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/yulia/Dropbox/HSE/C/project/Project-Weather-/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j4 -f &quot;/home/yulia/Dropbox/HSE/C/project/Project-Weather-/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j4 -f &quot;/home/yulia/Dropbox/HSE/C/project/Project-Weather-/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-				</MakeCommands>
-			</Target>
-			<Target title="edit_cache">
-				<Option working_dir="/home/yulia/Dropbox/HSE/C/project/Project-Weather-/cmake-build-debug"/>
-				<Option type="4"/>
-				<MakeCommands>
-					<Build command="/usr/bin/make -j4 -f &quot;/home/yulia/Dropbox/HSE/C/project/Project-Weather-/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
-					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/yulia/Dropbox/HSE/C/project/Project-Weather-/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j4 -f &quot;/home/yulia/Dropbox/HSE/C/project/Project-Weather-/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j4 -f &quot;/home/yulia/Dropbox/HSE/C/project/Project-Weather-/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="C:/win-builds/bin/mingw32-make.exe -f &quot;C:/Users/igor/Project-Weather-/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
+					<CompileFile command="C:/win-builds/bin/mingw32-make.exe -f &quot;C:/Users/igor/Project-Weather-/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="C:/win-builds/bin/mingw32-make.exe -f &quot;C:/Users/igor/Project-Weather-/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="C:/win-builds/bin/mingw32-make.exe -f &quot;C:/Users/igor/Project-Weather-/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="Project_Weather_">
-				<Option output="/home/yulia/Dropbox/HSE/C/project/Project-Weather-/cmake-build-debug/Project_Weather_" prefix_auto="0" extension_auto="0"/>
-				<Option working_dir="/home/yulia/Dropbox/HSE/C/project/Project-Weather-/cmake-build-debug"/>
+				<Option output="C:/Users/igor/Project-Weather-/cmake-build-debug/Project_Weather_.exe" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="C:/Users/igor/Project-Weather-/cmake-build-debug"/>
 				<Option object_output="./"/>
 				<Option type="1"/>
 				<Option compiler="gcc"/>
 				<Compiler>
-					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include"/>
-					<Add directory="/usr/local/include"/>
-					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed"/>
-					<Add directory="/usr/include/x86_64-linux-gnu"/>
-					<Add directory="/usr/include"/>
+					<Add directory="C:/win-builds/include"/>
+					<Add directory="c:\win-builds\bin\../lib64/gcc/x86_64-w64-mingw32/4.8.3/include"/>
+					<Add directory="c:\win-builds\bin\../lib64/gcc/x86_64-w64-mingw32/4.8.3/include-fixed"/>
+					<Add directory="c:\win-builds\bin\../lib64/gcc/x86_64-w64-mingw32/4.8.3/../../../../x86_64-w64-mingw32/include"/>
 				</Compiler>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j4 -f &quot;/home/yulia/Dropbox/HSE/C/project/Project-Weather-/cmake-build-debug/Makefile&quot;  VERBOSE=1 Project_Weather_"/>
-					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/yulia/Dropbox/HSE/C/project/Project-Weather-/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j4 -f &quot;/home/yulia/Dropbox/HSE/C/project/Project-Weather-/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j4 -f &quot;/home/yulia/Dropbox/HSE/C/project/Project-Weather-/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="C:/win-builds/bin/mingw32-make.exe -f &quot;C:/Users/igor/Project-Weather-/cmake-build-debug/Makefile&quot;  VERBOSE=1 Project_Weather_"/>
+					<CompileFile command="C:/win-builds/bin/mingw32-make.exe -f &quot;C:/Users/igor/Project-Weather-/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="C:/win-builds/bin/mingw32-make.exe -f &quot;C:/Users/igor/Project-Weather-/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="C:/win-builds/bin/mingw32-make.exe -f &quot;C:/Users/igor/Project-Weather-/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="Project_Weather_/fast">
-				<Option output="/home/yulia/Dropbox/HSE/C/project/Project-Weather-/cmake-build-debug/Project_Weather_" prefix_auto="0" extension_auto="0"/>
-				<Option working_dir="/home/yulia/Dropbox/HSE/C/project/Project-Weather-/cmake-build-debug"/>
+				<Option output="C:/Users/igor/Project-Weather-/cmake-build-debug/Project_Weather_.exe" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="C:/Users/igor/Project-Weather-/cmake-build-debug"/>
 				<Option object_output="./"/>
 				<Option type="1"/>
 				<Option compiler="gcc"/>
 				<Compiler>
-					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include"/>
-					<Add directory="/usr/local/include"/>
-					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed"/>
-					<Add directory="/usr/include/x86_64-linux-gnu"/>
-					<Add directory="/usr/include"/>
+					<Add directory="C:/win-builds/include"/>
+					<Add directory="c:\win-builds\bin\../lib64/gcc/x86_64-w64-mingw32/4.8.3/include"/>
+					<Add directory="c:\win-builds\bin\../lib64/gcc/x86_64-w64-mingw32/4.8.3/include-fixed"/>
+					<Add directory="c:\win-builds\bin\../lib64/gcc/x86_64-w64-mingw32/4.8.3/../../../../x86_64-w64-mingw32/include"/>
 				</Compiler>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j4 -f &quot;/home/yulia/Dropbox/HSE/C/project/Project-Weather-/cmake-build-debug/Makefile&quot;  VERBOSE=1 Project_Weather_/fast"/>
-					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/yulia/Dropbox/HSE/C/project/Project-Weather-/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j4 -f &quot;/home/yulia/Dropbox/HSE/C/project/Project-Weather-/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j4 -f &quot;/home/yulia/Dropbox/HSE/C/project/Project-Weather-/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="C:/win-builds/bin/mingw32-make.exe -f &quot;C:/Users/igor/Project-Weather-/cmake-build-debug/Makefile&quot;  VERBOSE=1 Project_Weather_/fast"/>
+					<CompileFile command="C:/win-builds/bin/mingw32-make.exe -f &quot;C:/Users/igor/Project-Weather-/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="C:/win-builds/bin/mingw32-make.exe -f &quot;C:/Users/igor/Project-Weather-/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="C:/win-builds/bin/mingw32-make.exe -f &quot;C:/Users/igor/Project-Weather-/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="edit_cache">
+				<Option working_dir="C:/Users/igor/Project-Weather-/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="C:/win-builds/bin/mingw32-make.exe -f &quot;C:/Users/igor/Project-Weather-/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
+					<CompileFile command="C:/win-builds/bin/mingw32-make.exe -f &quot;C:/Users/igor/Project-Weather-/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="C:/win-builds/bin/mingw32-make.exe -f &quot;C:/Users/igor/Project-Weather-/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="C:/win-builds/bin/mingw32-make.exe -f &quot;C:/Users/igor/Project-Weather-/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="rebuild_cache">
+				<Option working_dir="C:/Users/igor/Project-Weather-/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="C:/win-builds/bin/mingw32-make.exe -f &quot;C:/Users/igor/Project-Weather-/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
+					<CompileFile command="C:/win-builds/bin/mingw32-make.exe -f &quot;C:/Users/igor/Project-Weather-/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="C:/win-builds/bin/mingw32-make.exe -f &quot;C:/Users/igor/Project-Weather-/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="C:/win-builds/bin/mingw32-make.exe -f &quot;C:/Users/igor/Project-Weather-/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 		</Build>
-		<Unit filename="/home/yulia/Dropbox/HSE/C/project/Project-Weather-/array.h">
+		<Unit filename="C:/Users/igor/Project-Weather-/array.h">
 			<Option target="Project_Weather_"/>
 		</Unit>
-		<Unit filename="/home/yulia/Dropbox/HSE/C/project/Project-Weather-/base.c">
+		<Unit filename="C:/Users/igor/Project-Weather-/average_temperature.c">
 			<Option target="Project_Weather_"/>
 		</Unit>
-		<Unit filename="/home/yulia/Dropbox/HSE/C/project/Project-Weather-/base.h">
+		<Unit filename="C:/Users/igor/Project-Weather-/average_temperature.h">
 			<Option target="Project_Weather_"/>
 		</Unit>
-		<Unit filename="/home/yulia/Dropbox/HSE/C/project/Project-Weather-/date.h">
+		<Unit filename="C:/Users/igor/Project-Weather-/base.c">
 			<Option target="Project_Weather_"/>
 		</Unit>
-		<Unit filename="/home/yulia/Dropbox/HSE/C/project/Project-Weather-/main.c">
+		<Unit filename="C:/Users/igor/Project-Weather-/base.h">
 			<Option target="Project_Weather_"/>
 		</Unit>
-		<Unit filename="/home/yulia/Dropbox/HSE/C/project/Project-Weather-/temperature.h">
+		<Unit filename="C:/Users/igor/Project-Weather-/date.h">
 			<Option target="Project_Weather_"/>
 		</Unit>
-		<Unit filename="/home/yulia/Dropbox/HSE/C/project/Project-Weather-/test.h">
+		<Unit filename="C:/Users/igor/Project-Weather-/main.c">
 			<Option target="Project_Weather_"/>
 		</Unit>
-		<Unit filename="/home/yulia/Dropbox/HSE/C/project/Project-Weather-/weather.c">
+		<Unit filename="C:/Users/igor/Project-Weather-/month_name.c">
 			<Option target="Project_Weather_"/>
 		</Unit>
-		<Unit filename="/home/yulia/Dropbox/HSE/C/project/Project-Weather-/weather.h">
+		<Unit filename="C:/Users/igor/Project-Weather-/month_name.h">
 			<Option target="Project_Weather_"/>
 		</Unit>
-		<Unit filename="/home/yulia/Dropbox/HSE/C/project/Project-Weather-/wind.h">
+		<Unit filename="C:/Users/igor/Project-Weather-/print_date.c">
 			<Option target="Project_Weather_"/>
 		</Unit>
-		<Unit filename="/home/yulia/Dropbox/HSE/C/project/Project-Weather-/CMakeLists.txt">
+		<Unit filename="C:/Users/igor/Project-Weather-/print_date.h">
+			<Option target="Project_Weather_"/>
+		</Unit>
+		<Unit filename="C:/Users/igor/Project-Weather-/temperature.h">
+			<Option target="Project_Weather_"/>
+		</Unit>
+		<Unit filename="C:/Users/igor/Project-Weather-/test.h">
+			<Option target="Project_Weather_"/>
+		</Unit>
+		<Unit filename="C:/Users/igor/Project-Weather-/weather.c">
+			<Option target="Project_Weather_"/>
+		</Unit>
+		<Unit filename="C:/Users/igor/Project-Weather-/weather.h">
+			<Option target="Project_Weather_"/>
+		</Unit>
+		<Unit filename="C:/Users/igor/Project-Weather-/weekday.c">
+			<Option target="Project_Weather_"/>
+		</Unit>
+		<Unit filename="C:/Users/igor/Project-Weather-/weekday.h">
+			<Option target="Project_Weather_"/>
+		</Unit>
+		<Unit filename="C:/Users/igor/Project-Weather-/wind.h">
+			<Option target="Project_Weather_"/>
+		</Unit>
+		<Unit filename="C:/Users/igor/Project-Weather-/CMakeLists.txt">
 			<Option virtualFolder="CMake Files\"/>
 		</Unit>
 	</Project>

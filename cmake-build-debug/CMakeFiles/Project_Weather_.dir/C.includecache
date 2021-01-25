@@ -6,15 +6,15 @@
 
 #IncludeRegexTransform: 
 
-/home/yulia/Dropbox/HSE/C/project/Project-Weather-/array.h
+C:/Users/igor/Project-Weather-/array.h
 stdlib.h
 -
 
-/home/yulia/Dropbox/HSE/C/project/Project-Weather-/base.c
-base.h
-/home/yulia/Dropbox/HSE/C/project/Project-Weather-/base.h
+C:/Users/igor/Project-Weather-/average_temperature.h
+stdio.h
+-
 
-/home/yulia/Dropbox/HSE/C/project/Project-Weather-/base.h
+C:/Users/igor/Project-Weather-/base.h
 string.h
 -
 stdio.h
@@ -22,45 +22,67 @@ stdio.h
 stdbool.h
 -
 array.h
-/home/yulia/Dropbox/HSE/C/project/Project-Weather-/array.h
+C:/Users/igor/Project-Weather-/array.h
 
-/home/yulia/Dropbox/HSE/C/project/Project-Weather-/date.h
+C:/Users/igor/Project-Weather-/date.h
 
-/home/yulia/Dropbox/HSE/C/project/Project-Weather-/main.c
+C:/Users/igor/Project-Weather-/main.c
 stdlib.h
 -
 locale.h
 -
+time.h
+-
 uchar.h
 -
 weather.h
-/home/yulia/Dropbox/HSE/C/project/Project-Weather-/weather.h
+C:/Users/igor/Project-Weather-/weather.h
 date.h
-/home/yulia/Dropbox/HSE/C/project/Project-Weather-/date.h
+C:/Users/igor/Project-Weather-/date.h
 temperature.h
-/home/yulia/Dropbox/HSE/C/project/Project-Weather-/temperature.h
+C:/Users/igor/Project-Weather-/temperature.h
 wind.h
-/home/yulia/Dropbox/HSE/C/project/Project-Weather-/wind.h
+C:/Users/igor/Project-Weather-/wind.h
 base.h
-/home/yulia/Dropbox/HSE/C/project/Project-Weather-/base.h
+C:/Users/igor/Project-Weather-/base.h
 test.h
-/home/yulia/Dropbox/HSE/C/project/Project-Weather-/test.h
+C:/Users/igor/Project-Weather-/test.h
+weekday.h
+C:/Users/igor/Project-Weather-/weekday.h
+month_name.h
+C:/Users/igor/Project-Weather-/month_name.h
+average_temperature.h
+C:/Users/igor/Project-Weather-/average_temperature.h
 
-/home/yulia/Dropbox/HSE/C/project/Project-Weather-/temperature.h
+C:/Users/igor/Project-Weather-/month_name.h
 
-/home/yulia/Dropbox/HSE/C/project/Project-Weather-/test.h
+C:/Users/igor/Project-Weather-/temperature.h
+
+C:/Users/igor/Project-Weather-/test.h
 base.h
-/home/yulia/Dropbox/HSE/C/project/Project-Weather-/base.h
+C:/Users/igor/Project-Weather-/base.h
 
-/home/yulia/Dropbox/HSE/C/project/Project-Weather-/weather.h
+C:/Users/igor/Project-Weather-/weather.h
 date.h
-/home/yulia/Dropbox/HSE/C/project/Project-Weather-/date.h
+C:/Users/igor/Project-Weather-/date.h
 temperature.h
-/home/yulia/Dropbox/HSE/C/project/Project-Weather-/temperature.h
+C:/Users/igor/Project-Weather-/temperature.h
 wind.h
-/home/yulia/Dropbox/HSE/C/project/Project-Weather-/wind.h
+C:/Users/igor/Project-Weather-/wind.h
 
-/home/yulia/Dropbox/HSE/C/project/Project-Weather-/wind.h
+C:/Users/igor/Project-Weather-/weekday.h
+stdio.h
+-
+stdlib.h
+-
+string.h
+-
+malloc.h
+-
+time.h
+-
+
+C:/Users/igor/Project-Weather-/wind.h
 base.h
-/home/yulia/Dropbox/HSE/C/project/Project-Weather-/base.h
+C:/Users/igor/Project-Weather-/base.h
 

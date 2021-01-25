@@ -1,5 +1,6 @@
 #include <stdlib.h>
 #include <locale.h>
+#include <time.h>
 #include <uchar.h>
 #include "weather.h"
 #include "date.h"
@@ -7,6 +8,11 @@
 #include "wind.h"
 #include "base.h"
 #include "test.h"
+#include "weekday.h"
+#include "month_name.h"
+#include "average_temperature.h"
+
+
 
 #define INPUT_MAX_LEN 200
 #define TEST "test"
@@ -87,18 +93,143 @@ WEATHER* ParseInput(FILE* file, int strings_number) {
     return parsed;
 }
 
+void print_date(int day, int mounth, int year, WEATHER* weather){
+    int day_of_week_number = weekday(weather->date.year, weather->date.month, weather->date.day);
+    switch (rand()%4) {
+        case 0:
+            if (day_of_week_number != 2) // В среду 13 января
+                printf("V ");
+            else
+                printf("Vo ");
+            print_weekday(day_of_week_number);
+            printf(" ");
+            printf("%d ", weather->date.day);
+            print_month(weather->date.month);
+            printf(" ");
+            break;
+        case 1:
+            printf("%d ", weather->date.day); // 13 января в среду
+            print_month(weather->date.month);
+            printf(" ");
+            if (day_of_week_number != 2)
+                printf("v ");
+            else
+                printf("vo ");
+            print_weekday(day_of_week_number);
+            printf(" ");
+            break;
+        case 2:
+            printf("%d.%d.%d ", weather->date.day, weather->date.month, weather->date.year); // 13.01.2021
+            printf(" ");
+            break;
+        case 3:
+            printf("%d ", weather->date.day); // 13 января
+            print_month(weather->date.month);
+            printf(" ");
+            break;
+    }
+}
+
+void print_day_temperature(int day_temp_min, int day_temp_max, WEATHER * weather){
+    int average_temperature = (day_temp_min + day_temp_max) / 2;
+    switch(rand()%6) {
+        case 0:
+            printf("dnyevnaya temperatura nachoditsa v promeshutke ot %d do %d gradusov C. ", day_temp_min,
+                   day_temp_max); // Дневная температуры назодится в промежутке от %d до %d градусов С
+            print_average_day_temperature(average_temperature, weather->date.month);
+            printf(". ");
+            break;
+
+        case 1:
+            printf("nizhnyaya granitsa temperatury dnya: %dC, ", day_temp_min); // Нижняя граница температуры дня %dC
+            printf("verchnyaya: %dC. ", day_temp_max); // Верхняя: %dC
+            print_average_day_temperature(average_temperature, weather->date.month);
+            printf(". ");
+            break;
+        case 2:
+            printf("dnem ot %d do %d gradusov. ", weather->day_temp.min_val, weather->day_temp.max_val);
+            print_average_day_temperature(average_temperature, weather->date.month);
+            printf(". ");
+            break;
+        case 3:
+            printf("dnyevnaya temperatura nachoditsa v promeshutke ot %d do %d gradusov C. ", day_temp_min,
+                   day_temp_max);
+            break;
+        case 4:
+            printf("nizhnyaya granitsa temperatury dnya: %dC, ", day_temp_min); // Нижняя граница температуры дня %dC
+            printf("verchnyaya: %dC. ", day_temp_max);
+            break;
+        case 5:
+            printf("dnem ot %d do %d gradusov. ", weather->day_temp.min_val, weather->day_temp.max_val);
+            break;
+    }
+    }
+
+void print_night_temperature(int night_temp_min, int night_temp_max, WEATHER* weather){
+    int average_temperature = (night_temp_min + night_temp_max) / 2;
+    switch(rand()%6) {
+        case 0:
+            printf("Nochnaya temperatura nachoditsa v promeshutke ot %d do %d gradusov C. ", night_temp_min,
+                   night_temp_max); // Дневная температуры назодится в промежутке от %d до %d градусов С
+            print_average_night_temperature(average_temperature, weather->date.month);
+            printf(". ");
+            break;
+
+        case 1:
+            printf("Nizhnyaya granitsa temperatury nochi: %dC, ", night_temp_min); // Нижняя граница температуры дня %dC
+            printf("verchnyaya: %dC. ", night_temp_max); // Верхняя: %dC
+            print_average_night_temperature(average_temperature, weather->date.month);
+            printf(". ");
+            break;
+        case 2:
+            printf("Nochyu ot %d do %d gradusov. ", weather->night_temp.min_val, weather->night_temp.max_val);
+            print_average_night_temperature(average_temperature, weather->date.month);
+            printf(". ");
+            break;
+        case 3:
+            printf("Nochnaya temperatura nachoditsa v promeshutke ot %d do %d gradusov C. ", night_temp_min,
+                   night_temp_max);
+            break;
+        case 4:
+            printf("Nizhnyaya granitsa temperatury nochi: %dC, ", night_temp_min); // Нижняя граница температуры дня %dC
+            printf("verchnyaya: %dC. ", night_temp_max);
+            break;
+        case 5:
+            printf("Nochyu ot %d do %d gradusov. ", weather->night_temp.min_val, weather->night_temp.max_val);
+            break;
+    }
+}
+
+void print_pressure(WEATHER* weather){
+    int pressure = weather->pressure;
+            if (pressure >= 755)
+                printf("Atmosfernoe davlenie visokoe: %d mm rtutnogo stolba", pressure);
+            if (pressure < 755 && pressure > 745)
+                printf("Atmosfernoe davlenie v norme: %d mm rtutnogo stolba", pressure);
+            if (pressure <= 745)
+                printf("Atmosfernoe davlenie nizkoe: %d mm rtutnogo stolba", pressure);
+
+    }
+
+
+
 int main(int argc, char** argv) {
     setlocale(LC_ALL, "ru-RU.utf8");
-
+    srand(time(NULL));
+    rand();
     if (argc > 2 && strcmp(argv[2], TEST) == 0) {
         Test();
     }
 
     char* path = argv[1];
-    FILE* input_file = fopen(path, "r");
+    FILE* input_file = fopen("C:/Users/igor/Project-Weather-/weather_input.txt", "rt");
     int str_number = 0;
     fscanf(input_file, "%d\n", &str_number);
     WEATHER* weather = ParseInput(input_file, str_number);
+    print_date(weather->date.day, weather->date.month, weather->date.year, weather);
+    print_day_temperature(weather->day_temp.min_val, weather->day_temp.max_val, weather);
+    print_night_temperature(weather->night_temp.min_val, weather->night_temp.max_val, weather);
+    print_pressure(weather);
 
     fclose(input_file);
     return 0;
