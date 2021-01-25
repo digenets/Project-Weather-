@@ -2,62 +2,62 @@
 
 #include "base.h"
 
-StringArray comments_wind_0() {
+StringArray CommentsWind0() {
     StringArray result = CreateStringArray(3);
-    result.array[0] = "Безветрие, дым поднимается вертикально, листья деревьев неподвижны.";
+    result.array[0] = "Безветрие.";
     result.array[1] = "Штиль.";
     result.array[2] = "Ветра не будет.";
     return result;
 }
 
-StringArray comments_wind_1_3() {
+StringArray CommentsWind1to3() {
     StringArray result = CreateStringArray(2);
-    result.array[0] = "Направление ветра заметно по относу дыма.";
-    result.array[1] = "Движение ветра ощущается лицом, шелестят листья, приводится в движение флюгер.";
+    result.array[0] = "Направление ветра может быть заметно по относу дыма.";
+    result.array[1] = "Движение ветра ощущается лицом, шелестят листья, приводится в движение флюгер."; // todo не подходит для зимы, перефразировать
     return result;
 }
 
-StringArray comments_wind_3_5() {
+StringArray CommentsWind3to5() {
     StringArray result = CreateStringArray(1);
-    result.array[0] = "Листья и тонкие ветви деревьев всё время колышутся, ветер развевает лёгкие флаги.";
+    result.array[0] = "Листья и тонкие ветви деревьев всё время колышутся, ветер развевает лёгкие флаги."; // todo перефразировать
     return result;
 }
 
-StringArray comments_wind_5_8() {
+StringArray CommentsWind5to8() {
     StringArray result = CreateStringArray(1);
-    result.array[0] = "Ветер поднимает пыль и мусор, приводит в движение тонкие ветви деревьев.";
+    result.array[0] = "Ветер поднимает пыль и мусор, приводит в движение тонкие ветви деревьев."; // todo перефразировать
     return result;
 }
 
-StringArray comments_wind_8_14() {
+StringArray CommentsWind8to14() {
     StringArray result = CreateStringArray(2);
     result.array[0] = "Качаются тонкие стволы деревьев, движение ветра ощущается рукой.";
     result.array[1] = "Качаются толстые сучья деревьев, гудят телеграфные провода.";
     return result;
 }
 
-StringArray comments_wind_14_17() {
+StringArray CommentsWind14to17() {
     StringArray result = CreateStringArray(1);
-    result.array[0] = "Гнутся стволы деревьев, трудно идти против ветра.";
+    result.array[0] = "Идти против ветра будет трудно.";
     return result;
 }
 
-StringArray comments_wind_17_20() {
+StringArray CommentsWind17to20() {
     StringArray result = CreateStringArray(1);
-    result.array[0] = "Ветер ломает сучья деревьев, идти против ветра очень трудно.";
+    result.array[0] = "Ветер может ломать сучья деревьев, идти против ветра будет очень трудно.";
     return result;
 }
 
-StringArray comments_wind_20_25() {
+StringArray CommentsWind20to25() {
     StringArray result = CreateStringArray(1);
-    result.array[0] = "Небольшие повреждения, ветер начинает разрушать крыши зданий.";
+    result.array[0] = "Возможны небольшие повреждения, ветер может разрушать крыши зданий.";
     return result;
 }
 
-StringArray comments_wind_more_than_25() {
+StringArray CommentsWindMoreThan25() {
     StringArray result = CreateStringArray(3);
-    result.array[0] = "Значительные разрушения строений, ветер вырывает деревья с корнем.";
-    result.array[1] = "Большие разрушения на значительном пространстве.";
-    result.array[2] = "Огромные разрушения, серьёзно повреждены здания, строения и дома, деревья вырваны с корнями, растительность уничтожена. Случай крайне редкий.";
+    result.array[0] = "Возможны значительные разрушения строений, ветер может вырывать деревья с корнем.";
+    result.array[1] = "Вероятны большие разрушения на значительном пространстве.";
+    result.array[2] = "Вероятны огромные разрушения, серьёзное повреждение зданий, строений и домов, деревья могут быть вырваны с корнями, растительность уничтожена. Случай крайне редкий.";
     return result;
 }

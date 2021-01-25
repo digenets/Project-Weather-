@@ -9,6 +9,7 @@
 #include "base.h"
 #include "test.h"
 #include "wind_constants.h"
+#include "precipitation_constants.h"
 
 #define INPUT_MAX_LEN 200
 #define TEST "test"
@@ -161,38 +162,59 @@ void WriteAboutWind(FILE* output_file, WEATHER weather) {
     }
 
     if (average == 0) {
-        int index = rand() % comments_wind_0().size;
-        fprintf(output_file, "%s ", comments_wind_0().array[index]);
+        int index = rand() % CommentsWind0().size;
+        fprintf(output_file, "%s ", CommentsWind0().array[index]);
     } else if (average > 0 && average <= 3) {
-        int index = rand() % comments_wind_1_3().size;
-        fprintf(output_file, "%s ", comments_wind_1_3().array[index]);
+        int index = rand() % CommentsWind1to3().size;
+        fprintf(output_file, "%s ", CommentsWind1to3().array[index]);
     } else if (average > 3 && average <= 5) {
-        int index = rand() % comments_wind_3_5().size;
-        fprintf(output_file, "%s ", comments_wind_3_5().array[index]);
+        int index = rand() % CommentsWind3to5().size;
+        fprintf(output_file, "%s ", CommentsWind3to5().array[index]);
     } else if (average > 5 && average <= 8) {
-        int index = rand() % comments_wind_5_8().size;
-        fprintf(output_file, "%s ", comments_wind_5_8().array[index]);
+        int index = rand() % CommentsWind5to8().size;
+        fprintf(output_file, "%s ", CommentsWind5to8().array[index]);
     } else if (average > 8 && average <= 14) {
-        int index = rand() % comments_wind_8_14().size;
-        fprintf(output_file, "%s ", comments_wind_8_14().array[index]);
+        int index = rand() % CommentsWind8to14().size;
+        fprintf(output_file, "%s ", CommentsWind8to14().array[index]);
     } else if (average > 14 && average <= 17) {
-        int index = rand() % comments_wind_14_17().size;
-        fprintf(output_file, "%s ", comments_wind_14_17().array[index]);
+        int index = rand() % CommentsWind14to17().size;
+        fprintf(output_file, "%s ", CommentsWind14to17().array[index]);
     } else if (average > 17 && average <= 20) {
-        int index = rand() % comments_wind_17_20().size;
-        fprintf(output_file, "%s ", comments_wind_17_20().array[index]);
+        int index = rand() % CommentsWind17to20().size;
+        fprintf(output_file, "%s ", CommentsWind17to20().array[index]);
     } else if (average > 20 && average <= 25) {
-        int index = rand() % comments_wind_20_25().size;
-        fprintf(output_file, "%s ", comments_wind_20_25().array[index]);
+        int index = rand() % CommentsWind20to25().size;
+        fprintf(output_file, "%s ", CommentsWind20to25().array[index]);
     } else if (average > 25) {
-        int index = rand() % comments_wind_more_than_25().size;
-        fprintf(output_file, "%s ", comments_wind_more_than_25().array[index]);
+        int index = rand() % CommentsWindMoreThan25().size;
+        fprintf(output_file, "%s ", CommentsWindMoreThan25().array[index]);
     }
     fprintf(output_file, "\n");
 }
 
-// todo 4) Ветер. Сила порывов. "Ветер восточный 3-5 м/с с порывами до 9 м/с"
-// todo 6) Словарь для осадков с вариативностью.
+void WriteAboutPrecipitation(FILE *output_file, WEATHER weather) {
+    if (strcmp(weather.precipitation, "-") == 0) {
+        int index = rand() % CommentsNoPrecipitation().size;
+        fprintf(output_file, "%s ", CommentsNoPrecipitation().array[index]);
+    } else {
+        if (strcmp(weather.precipitation, SNOW) == 0) {
+            int index = rand() % CommentsSnow().size;
+            fprintf(output_file, "%s ", CommentsSnow().array[index]);
+        } else if (strcmp(weather.precipitation, RAIN) == 0) {
+            int index = rand() % CommentsRain().size;
+            fprintf(output_file, "%s ", CommentsRain().array[index]);
+        } else if (strcmp(weather.precipitation, HAIL) == 0) {
+            int index = rand() % CommentsHail().size;
+            fprintf(output_file, "%s ", CommentsHail().array[index]);
+        } else if (strcmp(weather.precipitation, THUNDER) == 0) {
+            int index = rand() % CommentsThunder().size;
+            fprintf(output_file, "%s ", CommentsThunder().array[index]);
+        } else {
+            fprintf(output_file, "Ожидается %s. ", weather.precipitation);
+        }
+    }
+    fprintf(output_file, "\n");
+}
 
 int main(int argc, char** argv) {
     setlocale(LC_ALL, "ru-RU.utf8");
@@ -211,7 +233,9 @@ int main(int argc, char** argv) {
 
     FILE* output_file = fopen(argv[2], "a");
     for (int i = 0; i < weather_str_number; ++i) {
+        WriteAboutPrecipitation(output_file, weather[i]);
         WriteAboutWind(output_file, weather[i]);
+        fprintf(output_file, "\n");
     }
 
     fclose(input_file);
