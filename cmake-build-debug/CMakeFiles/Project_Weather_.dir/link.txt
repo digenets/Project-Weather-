@@ -1,1 +1,0 @@
-/usr/bin/cc -g   CMakeFiles/Project_Weather_.dir/main.c.o CMakeFiles/Project_Weather_.dir/weather.c.o CMakeFiles/Project_Weather_.dir/base.c.o  -o Project_Weather_ 
