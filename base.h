@@ -1,4 +1,5 @@
-#pragma once
+#ifndef PROJECT_WEATHER__BASE_H
+#define PROJECT_WEATHER__BASE_H
 
 #include <string.h>
 #include <stdio.h>
@@ -11,3 +12,5 @@
 DECLARE_ARRAY(StringArray, STRING)
 
 StringArray Split(char* str, char delim);
+
+#endif //PROJECT_WEATHER__BASE_H

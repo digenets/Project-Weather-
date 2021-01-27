@@ -1,4 +1,5 @@
-#pragma once
+#ifndef PROJECT_WEATHER__WIND_H
+#define PROJECT_WEATHER__WIND_H
 
 #include "base.h"
 
@@ -12,3 +13,5 @@ typedef struct Wind {
     int gusts_min_val; // порывы
     int gusts_max_val;
 }WIND;
+
+#endif //PROJECT_WEATHER__WIND_H

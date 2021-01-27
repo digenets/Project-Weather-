@@ -1,4 +1,5 @@
-#pragma once
+#ifndef PROJECT_WEATHER__WEATHER_H
+#define PROJECT_WEATHER__WEATHER_H
 
 #include "date.h"
 #include "temperature.h"
@@ -14,3 +15,5 @@ typedef struct Weather {
     int pressure;
     StringArray earth_phenomena;
 }WEATHER;
+
+#endif //PROJECT_WEATHER__WEATHER_H

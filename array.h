@@ -1,4 +1,5 @@
-#pragma once
+#ifndef PROJECT_WEATHER__ARRAY_H
+#define PROJECT_WEATHER__ARRAY_H
 
 #include <stdlib.h>
 
@@ -20,3 +21,5 @@ ARRAY_TYPE_NAME Create##ARRAY_TYPE_NAME(size_t size) {           \
     ARRAY_TYPE_NAME result = {new_array, size};                  \
     return result;                                               \
 }
+
+#endif //PROJECT_WEATHER__ARRAY_H

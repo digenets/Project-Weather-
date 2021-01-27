@@ -1,4 +1,5 @@
-#pragma once
+#ifndef PROJECT_WEATHER__TEST_H
+#define PROJECT_WEATHER__TEST_H
 
 #include "base.h"
 
@@ -29,3 +30,5 @@ void Test() {
         abort();
     }
 }
+
+#endif //PROJECT_WEATHER__TEST_H
