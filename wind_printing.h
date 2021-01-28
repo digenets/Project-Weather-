@@ -10,6 +10,6 @@ void PrintWindDirection(FILE* output_file, StringArray wind_dir_text);
 void PrintWindSpeed(FILE* output_file, int speed_min, int speed_max);
 void PrintGusts(FILE* output_file, int min_val, int max_val);
 void PrintWindComment(FILE* output_file, int average_speed);
-void PrintWind(FILE* output_file, WEATHER* weather);
+void PrintWind(FILE* output_file, WIND* wind, WIND* previous_day_wind);
 
 #endif //PROJECT_WEATHER__WIND_PRINTING_H

@@ -1,3 +1,4 @@
+#include <math.h>
 #include "wind_printing.h"
 
 StringArray ConvertWindDirection(StringArray directions, int word_ending_type) {
@@ -121,37 +122,104 @@ void PrintWindComment(FILE* output_file, int average_speed) {
     fprintf(output_file, "\n");
 }
 
-void PrintWind(FILE* output_file, WEATHER* weather) {
-    WIND wind = weather->wind;
+int WindAverage(const WIND *wind) {
+    int average = 0;
+    if (wind->speed_max_val == -1) {
+        average = wind->speed_min_val;
+    } else {
+        average = round((wind->speed_min_val + wind->speed_max_val) / 2);
+    }
+    return average;
+}
 
+void PrintWind(FILE* output_file, WIND* wind, WIND* previous_day_wind) {
     // если ветер есть
-    if (wind.speed_min_val != 0) {
+    if (wind->speed_min_val != 0) {
         StringArray wind_dir_text;
 
-        // варианты фраз про направление ветра
-        switch (rand() % 2) {
-            case 0: // "Ветер восточный "
-                fprintf(output_file, "Ветер ");
-                wind_dir_text = ConvertWindDirection(wind.direction, WORD_ENDING_MASCULINE);
-                PrintWindDirection(output_file, wind_dir_text);
-                break;
-            case 1: // "Направление ветра юго-западное, "
-                fprintf(output_file, "Направление ветра ");
-                wind_dir_text = ConvertWindDirection(wind.direction, WORD_ENDING_NEUTER);
-                PrintWindDirection(output_file, wind_dir_text);
-                break;
+        if (previous_day_wind != NULL && rand() % 2 == 0) { // в половине случаев
+            int diff = WindAverage(wind) - WindAverage(previous_day_wind);
+            if (abs(diff) <= 1) {
+                // ветер не изменится
+            } else if (abs(diff) > 1 && abs(diff) <= 10) {
+                // ветер усилится/ослабнет
+            } else if (abs(diff) > 10) {
+                // ветер значительно изменится
+            }
+
+            print_wind_speed();
+
+            // то же с направлением
+            if (wind->direction == previous_day_wind->direction) {
+                // не писать или сказать, что не изменится
+            } else {
+                // направление сменится на ...
+            }
+        } else {
+            // варианты фраз про направление ветра
+            switch (rand() % 2) {
+                case 0: // "Ветер восточный "
+                    fprintf(output_file, "Ветер ");
+                    wind_dir_text = ConvertWindDirection(wind.direction, WORD_ENDING_MASCULINE);
+                    PrintWindDirection(output_file, wind_dir_text);
+                    break;
+                case 1: // "Направление ветра юго-западное, "
+                    fprintf(output_file, "Направление ветра ");
+                    wind_dir_text = ConvertWindDirection(wind.direction, WORD_ENDING_NEUTER);
+                    PrintWindDirection(output_file, wind_dir_text);
+                    break;
+            }
+
+            PrintWindSpeed(output_file, wind->speed_min_val, wind->speed_max_val);
+            PrintGusts(output_file, wind->gusts_min_val, wind->gusts_max_val);
         }
 
-        PrintWindSpeed(output_file, wind.speed_min_val, wind.speed_max_val);
-        PrintGusts(output_file, wind.gusts_min_val, wind.gusts_max_val);
+        // комментарий в зависимости от средней скорости ветра
+        int average = WindAverage(wind);
+        PrintWindComment(output_file, average);
+
+
+
+
+
+
+
+
+        if (previous_day_wind != NULL
+                && abs(WindAverage(wind) - WindAverage(previous_day_wind)) > 10 // todo: магическое число
+                && rand() % 2 == 0) { // чтобы выполнялось в половине случаев
+            switch (rand() % 2) {
+                case 0: // "Ветер значительно усилится и составит "
+                    fprintf(output_file, "Ветер значительно усилится и составит ");
+                    wind_dir_text = ConvertWindDirection(wind->direction, WORD_ENDING_MASCULINE);
+                    PrintWindDirection(output_file, wind_dir_text);
+                    break;
+                case 1: // "Направление ветра юго-западное, "
+                    fprintf(output_file, "Направление ветра ");
+                    break;
+            }
+            // todo: после написать, что направление ветра сменится на такое-то, или если не сменится - не писать
+        } else {
+            // варианты фраз про направление ветра
+            switch (rand() % 2) {
+                case 0: // "Ветер восточный "
+                    fprintf(output_file, "Ветер ");
+                    wind_dir_text = ConvertWindDirection(wind.direction, WORD_ENDING_MASCULINE);
+                    PrintWindDirection(output_file, wind_dir_text);
+                    break;
+                case 1: // "Направление ветра юго-западное, "
+                    fprintf(output_file, "Направление ветра ");
+                    wind_dir_text = ConvertWindDirection(wind.direction, WORD_ENDING_NEUTER);
+                    PrintWindDirection(output_file, wind_dir_text);
+                    break;
+            }
+        }
+
+        PrintWindSpeed(output_file, wind->speed_min_val, wind->speed_max_val);
+        PrintGusts(output_file, wind->gusts_min_val, wind->gusts_max_val);
     }
 
     // комментарий в зависимости от средней скорости ветра
-    int average = 0;
-    if (wind.speed_max_val == -1) {
-        average = wind.speed_min_val;
-    } else {
-        average = (wind.speed_min_val + wind.speed_max_val) / 2;
-    }
+    int average = WindAverage(wind);
     PrintWindComment(output_file, average);
 }
