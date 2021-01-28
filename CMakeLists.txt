@@ -3,4 +3,4 @@ project(Project_Weather_ C)
 
 set(CMAKE_C_STANDARD 11)
 
-add_executable(Project_Weather_ main.c date.h temperature.h weather.h weather.c wind.h array.h test.h base.h base.c)
+add_executable(Project_Weather_ main.c date.h temperature.h weather.h weather.c wind.h array.h test.h base.h base.c wind_constants.h precipitation_constants.h wind_printing.c wind_printing.h wind_constants.c precipitation_printing.c precipitation_printing.h precipitation_constants.c)

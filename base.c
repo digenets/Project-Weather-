@@ -1,5 +1,7 @@
 #include "base.h"
 
+DEFINE_ARRAY(StringArray, STRING)
+
 StringArray Split(char* str, char delim) {
     // посчитать, сколько разделителей, чтоб выделить потом память под строки (кол-во разделителей + 1)
     int delim_counter = 0;

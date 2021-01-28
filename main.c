@@ -1,12 +1,15 @@
 #include <stdlib.h>
 #include <locale.h>
 #include <uchar.h>
+#include <time.h>
 #include "weather.h"
 #include "date.h"
 #include "temperature.h"
 #include "wind.h"
 #include "base.h"
 #include "test.h"
+#include "precipitation_printing.h"
+#include "wind_printing.h"
 
 #define INPUT_MAX_LEN 200
 #define TEST "test"
@@ -89,17 +92,27 @@ WEATHER* ParseInput(FILE* file, int strings_number) {
 
 int main(int argc, char** argv) {
     setlocale(LC_ALL, "ru-RU.utf8");
+    srand(time(0));
+    rand();
 
-    if (argc > 2 && strcmp(argv[2], TEST) == 0) {
+    if (argc > 3 && strcmp(argv[3], TEST) == 0) {
         Test();
     }
 
     char* path = argv[1];
     FILE* input_file = fopen(path, "r");
-    int str_number = 0;
-    fscanf(input_file, "%d\n", &str_number);
-    WEATHER* weather = ParseInput(input_file, str_number);
+    int weather_str_number = 0;
+    fscanf(input_file, "%d\n", &weather_str_number);
+    WEATHER* weather = ParseInput(input_file, weather_str_number);
+
+    FILE* output_file = fopen(argv[2], "a");
+    for (int i = 0; i < weather_str_number; ++i) {
+        PrintPrecipitation(output_file, &weather[i]);
+        PrintWind(output_file, &weather[i]);
+        fprintf(output_file, "\n");
+    }
 
     fclose(input_file);
+    fclose(output_file);
     return 0;
 }
