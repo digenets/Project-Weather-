@@ -22,5 +22,4 @@ void PrintPrecipitation(FILE *output_file, WEATHER* weather) {
             fprintf(output_file, "Ожидается %s. ", weather->precipitation);
         }
     }
-    fprintf(output_file, "\n");
 }

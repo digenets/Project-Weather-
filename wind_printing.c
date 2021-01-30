@@ -39,50 +39,59 @@ StringArray ConvertWindDirection(StringArray directions, int word_ending_type) {
     return directions_str;
 }
 
-void PrintWindDirection(FILE* output_file, StringArray wind_dir_text) {
+/* wind_dir_text должен содержать строки типа "восточный", а не сокращения */
+void PrintWindDirection(FILE* output_file, StringArray wind_direction_text) {
     // если направление ветра задаётся одной буквой
-    if (wind_dir_text.size == 1) {
-        fprintf(output_file, "%s ", wind_dir_text.array[0]); // "восточный "
+    if (wind_direction_text.size == 1) {
+        fprintf(output_file, "%s", wind_direction_text.array[0]); // "восточный "
     } else {
-        for (int i = 0; i < wind_dir_text.size; ++i) { // "юго-восточный, юго-западный "
-            fprintf(output_file, "%s", wind_dir_text.array[i]);
-            if (i == wind_dir_text.size - 1) {
-                fprintf(output_file, " ");
-            } else {
+        for (int i = 0; i < wind_direction_text.size; ++i) { // "юго-восточный, юго-западный "
+            fprintf(output_file, "%s", wind_direction_text.array[i]);
+            if (i != wind_direction_text.size - 1) {
                 fprintf(output_file, ", ");
             }
         }
     }
 }
 
-void PrintWindSpeed(FILE* output_file, int speed_min, int speed_max) {
-    switch (rand() % 2) {
-        case 0: // "3-5 м/с"
-            fprintf(output_file, "%d", speed_min);
-            if (speed_max != -1) {
-                fprintf(output_file, "-%d", speed_max);
-            }
+void PrintWindSpeedValue(FILE* output_file, int speed_min, int speed_max, int if_previous_day_exists) {
+    // если есть предыдущий день, фраза "от 3 до 5 м/с" не подойдёт
+    if (if_previous_day_exists == PREVIOUS_DAY_EXISTS) {
+        fprintf(output_file, "%d", speed_min);
+        if (speed_max != -1) {
+            fprintf(output_file, "-%d", speed_max);
+        }
+    } else {
+        switch (rand() % 2) {
+            case 0: // "3-5 м/с"
+                fprintf(output_file, "%d", speed_min);
+                if (speed_max != -1) {
+                    fprintf(output_file, "-%d", speed_max);
+                }
 
-            break;
-        case 1: // "от 3 до 5 м/с"
-            fprintf(output_file, "от %d ", speed_min);
-            if (speed_max != -1) {
-                fprintf(output_file, "до %d", speed_max);
-            }
-            break;
+                break;
+            case 1: // "от 3 до 5 м/с"
+                if (speed_max != -1) {
+                    fprintf(output_file, "от %d до %d", speed_min, speed_max);
+                } else {
+                    fprintf(output_file, "до %d", speed_min);
+                }
+                break;
+        }
     }
     fprintf(output_file, " м/с");
 }
 
-void PrintGusts(FILE* output_file, int min_val, int max_val) {
-    switch (rand() % 2) {
-        case 0:
-            fprintf(output_file, " с порывами до ");
-            break;
-        case 1:
-            fprintf(output_file, ", порывы могут достигать ");
-            break;
+void PrintGustsValue(FILE* output_file, int min_val, int max_val, int if_previous_day_exists) {
+    StringArray gusts_text;
+    if (if_previous_day_exists == PREVIOUS_DAY_EXISTS) {
+        gusts_text = WindGustsWithPrevDay();
+    } else {
+        gusts_text = WindGustsWithoutPrevDay();
     }
+    int index = rand() % gusts_text.size;
+    fprintf(output_file, "%s", gusts_text.array[index]);
+
     fprintf(output_file, "%d", min_val);
     if (max_val != -1) {
         fprintf(output_file, "-%d", max_val);
@@ -90,6 +99,7 @@ void PrintGusts(FILE* output_file, int min_val, int max_val) {
     fprintf(output_file, " м/с. ");
 }
 
+/* комментарий в зависимости от средней скорости ветра */
 void PrintWindComment(FILE* output_file, int average_speed) {
     if (average_speed == 0) {
         int index = rand() % CommentsWind0().size;
@@ -119,107 +129,120 @@ void PrintWindComment(FILE* output_file, int average_speed) {
         int index = rand() % CommentsWindMoreThan25().size;
         fprintf(output_file, "%s ", CommentsWindMoreThan25().array[index]);
     }
-    fprintf(output_file, "\n");
 }
 
-int WindAverage(const WIND *wind) {
+int GetAverageSpeed(const int min_speed, const int max_speed) {
     int average = 0;
-    if (wind->speed_max_val == -1) {
-        average = wind->speed_min_val;
+    if (max_speed == -1) {
+        average = min_speed;
     } else {
-        average = round((wind->speed_min_val + wind->speed_max_val) / 2);
+        average = round((min_speed + max_speed) / 2);
     }
     return average;
 }
 
-void PrintWind(FILE* output_file, WIND* wind, WIND* previous_day_wind) {
-    // если ветер есть
-    if (wind->speed_min_val != 0) {
-        StringArray wind_dir_text;
+int GetSpeedDiff(int min_speed, int max_speed, int min_speed_prev_day, int max_speed_prev_day) {
+    int average_speed = GetAverageSpeed(min_speed, max_speed);
+    int average_speed_prev_day = GetAverageSpeed(min_speed_prev_day, max_speed_prev_day);
+    int speed_diff = average_speed - average_speed_prev_day;
+    return speed_diff;
+}
 
-        if (previous_day_wind != NULL && rand() % 2 == 0) { // в половине случаев
-            int diff = WindAverage(wind) - WindAverage(previous_day_wind);
-            if (abs(diff) <= 1) {
-                // ветер не изменится
-            } else if (abs(diff) > 1 && abs(diff) <= 10) {
-                // ветер усилится/ослабнет
-            } else if (abs(diff) > 10) {
-                // ветер значительно изменится
-            }
-
-            print_wind_speed();
-
-            // то же с направлением
-            if (wind->direction == previous_day_wind->direction) {
-                // не писать или сказать, что не изменится
-            } else {
-                // направление сменится на ...
-            }
+void PrintWindSpeedChange(FILE* output_file, const WIND* wind, const WIND* previous_day_wind) {
+    int speed_diff = GetSpeedDiff(wind->speed_min_val, wind->speed_max_val,
+                                  previous_day_wind->speed_min_val, previous_day_wind->speed_max_val);
+    if (abs(speed_diff) <= 1) {
+        int index = rand() % WindSpeedNotChange().size;
+        fprintf(output_file, "%s", WindSpeedNotChange().array[index]);
+    } else if (abs(speed_diff) > 1 && abs(speed_diff) <= 10) {
+        if (speed_diff > 0) {
+            int index = rand() % WindIncreased().size;
+            fprintf(output_file, "%s", WindIncreased().array[index]);
         } else {
-            // варианты фраз про направление ветра
-            switch (rand() % 2) {
-                case 0: // "Ветер восточный "
-                    fprintf(output_file, "Ветер ");
-                    wind_dir_text = ConvertWindDirection(wind.direction, WORD_ENDING_MASCULINE);
-                    PrintWindDirection(output_file, wind_dir_text);
-                    break;
-                case 1: // "Направление ветра юго-западное, "
-                    fprintf(output_file, "Направление ветра ");
-                    wind_dir_text = ConvertWindDirection(wind.direction, WORD_ENDING_NEUTER);
-                    PrintWindDirection(output_file, wind_dir_text);
-                    break;
-            }
-
-            PrintWindSpeed(output_file, wind->speed_min_val, wind->speed_max_val);
-            PrintGusts(output_file, wind->gusts_min_val, wind->gusts_max_val);
+            int index = rand() % WindDecreased().size;
+            fprintf(output_file, "%s", WindDecreased().array[index]);
         }
-
-        // комментарий в зависимости от средней скорости ветра
-        int average = WindAverage(wind);
-        PrintWindComment(output_file, average);
-
-
-
-
-
-
-
-
-        if (previous_day_wind != NULL
-                && abs(WindAverage(wind) - WindAverage(previous_day_wind)) > 10 // todo: магическое число
-                && rand() % 2 == 0) { // чтобы выполнялось в половине случаев
-            switch (rand() % 2) {
-                case 0: // "Ветер значительно усилится и составит "
-                    fprintf(output_file, "Ветер значительно усилится и составит ");
-                    wind_dir_text = ConvertWindDirection(wind->direction, WORD_ENDING_MASCULINE);
-                    PrintWindDirection(output_file, wind_dir_text);
-                    break;
-                case 1: // "Направление ветра юго-западное, "
-                    fprintf(output_file, "Направление ветра ");
-                    break;
-            }
-            // todo: после написать, что направление ветра сменится на такое-то, или если не сменится - не писать
+        PrintWindSpeedValue(output_file, wind->speed_min_val, wind->speed_max_val, PREVIOUS_DAY_EXISTS);
+        fprintf(output_file, ". ");
+    } else if (abs(speed_diff) > 10) {
+        if (speed_diff > 0) {
+            int index = rand() % WindSpeedGreatlyIncreased().size;
+            fprintf(output_file, "%s", WindSpeedGreatlyIncreased().array[index]);
         } else {
-            // варианты фраз про направление ветра
-            switch (rand() % 2) {
-                case 0: // "Ветер восточный "
-                    fprintf(output_file, "Ветер ");
-                    wind_dir_text = ConvertWindDirection(wind.direction, WORD_ENDING_MASCULINE);
-                    PrintWindDirection(output_file, wind_dir_text);
-                    break;
-                case 1: // "Направление ветра юго-западное, "
-                    fprintf(output_file, "Направление ветра ");
-                    wind_dir_text = ConvertWindDirection(wind.direction, WORD_ENDING_NEUTER);
-                    PrintWindDirection(output_file, wind_dir_text);
-                    break;
-            }
+            int index = rand() % WindSpeedGreatlyDecreased().size;
+            fprintf(output_file, "%s", WindSpeedGreatlyDecreased().array[index]);
         }
+        PrintWindSpeedValue(output_file, wind->speed_min_val, wind->speed_max_val, PREVIOUS_DAY_EXISTS);
+        fprintf(output_file, ". ");
+    }
+}
 
-        PrintWindSpeed(output_file, wind->speed_min_val, wind->speed_max_val);
-        PrintGusts(output_file, wind->gusts_min_val, wind->gusts_max_val);
+void PrintWindComparedWithPreviousDay(FILE* output_file, const WIND* wind, const WIND* previous_day_wind) {
+    int speed_diff = GetSpeedDiff(wind->speed_min_val, wind->speed_max_val,
+                                  previous_day_wind->speed_min_val, previous_day_wind->speed_max_val);
+    // в половине случаев, если скорость ветра не изменилась, не будем писать про ветер совсем
+    if (abs(speed_diff) <= 1 && rand() % 2 == 0) {
+        return;
+    }
+    PrintWindSpeedChange(output_file, wind, previous_day_wind);
+
+    if (wind->speed_min_val == 0 && wind->speed_max_val <= 0) {
+        // порывов и направления нет
+        return;
     }
 
-    // комментарий в зависимости от средней скорости ветра
-    int average = WindAverage(wind);
+    // о порывах, если они изменились в среднем
+    int gusts_diff = GetSpeedDiff(wind->gusts_min_val, wind->gusts_max_val,
+                                  previous_day_wind->gusts_min_val, previous_day_wind->gusts_max_val);
+    if (abs(gusts_diff) > 1) {
+        PrintGustsValue(output_file, wind->gusts_min_val, wind->gusts_max_val, PREVIOUS_DAY_EXISTS);
+    }
+
+    // если направление ветра не изменилось - не писать про него
+    if (!AreStringArraysEqual(wind->direction, previous_day_wind->direction)) {
+        int index = rand() % WindDirectionChange().size;
+        fprintf(output_file, "%s", WindDirectionChange().array[index]);
+
+        StringArray direction_with_ending = ConvertWindDirection(wind->direction, WORD_ENDING_NEUTER);
+        PrintWindDirection(output_file, direction_with_ending);
+        fprintf(output_file, ". ");
+    }
+
+    if (GetSpeedDiff(wind->speed_min_val, wind->speed_max_val,
+                     previous_day_wind->speed_min_val, previous_day_wind->speed_max_val) != 0) {
+        int average = GetAverageSpeed(wind->speed_min_val, wind->speed_max_val);
+        PrintWindComment(output_file, average);
+    }
+}
+
+void PrintWindWithoutComparing(FILE* output_file, const WIND* wind) {
+    // если скорость = 0, то нет смысла писать про направление
+    if (!(wind->speed_min_val == 0 && wind->speed_max_val <= 0)) {
+        StringArray wind_direction_text;
+        switch (rand() % 2) {
+            case 0: // "Ветер восточный "
+                fprintf(output_file, "Ветер ");
+                wind_direction_text = ConvertWindDirection(wind->direction, WORD_ENDING_MASCULINE);
+                PrintWindDirection(output_file, wind_direction_text);
+                break;
+            case 1: // "Направление ветра юго-западное, "
+                fprintf(output_file, "Направление ветра ");
+                wind_direction_text = ConvertWindDirection(wind->direction, WORD_ENDING_NEUTER);
+                PrintWindDirection(output_file, wind_direction_text);
+                break;
+        }
+        fprintf(output_file, " ");
+        PrintWindSpeedValue(output_file, wind->speed_min_val, wind->speed_max_val, PREVIOUS_DAY_NOT_EXISTS);
+        PrintGustsValue(output_file, wind->gusts_min_val, wind->gusts_max_val, PREVIOUS_DAY_NOT_EXISTS);
+    }
+    int average = GetAverageSpeed(wind->speed_min_val, wind->speed_max_val);
     PrintWindComment(output_file, average);
+}
+
+void PrintWind(FILE* output_file, WIND* wind, WIND* previous_day_wind) {
+    if (previous_day_wind != NULL && rand() % 2 == 0) {
+        PrintWindComparedWithPreviousDay(output_file, wind, previous_day_wind);
+    } else {
+        PrintWindWithoutComparing(output_file, wind);
+    }
 }
