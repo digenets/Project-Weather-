@@ -2,6 +2,18 @@
 
 DEFINE_ARRAY(StringArray, STRING)
 
+bool AreStringArraysEqual(StringArray lhs, StringArray rhs) {
+    if (lhs.size != rhs.size) {
+        return false;
+    }
+    for (int i = 0; i < lhs.size; ++i) {
+        if (strcmp(lhs.array[i], rhs.array[i]) != 0) {
+            return false;
+        }
+    }
+    return true;
+}
+
 StringArray Split(char* str, char delim) {
     // посчитать, сколько разделителей, чтоб выделить потом память под строки (кол-во разделителей + 1)
     int delim_counter = 0;

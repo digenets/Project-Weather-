@@ -108,7 +108,11 @@ int main(int argc, char** argv) {
     FILE* output_file = fopen(argv[2], "a");
     for (int i = 0; i < weather_str_number; ++i) {
         PrintPrecipitation(output_file, &weather[i]);
-        PrintWind(output_file, &weather[i]);
+        if (i > 0) {
+            PrintWind(output_file, &weather[i].wind, &weather[i-1].wind);
+        } else {
+            PrintWind(output_file, &weather[i].wind, NULL);
+        }
         fprintf(output_file, "\n");
     }
 

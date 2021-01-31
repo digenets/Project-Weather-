@@ -11,6 +11,7 @@
 
 DECLARE_ARRAY(StringArray, STRING)
 
+bool AreStringArraysEqual(StringArray lhs, StringArray rhs);
 StringArray Split(char* str, char delim);
 
 #endif //PROJECT_WEATHER__BASE_H
