@@ -114,9 +114,7 @@ int main(int argc, char** argv) {
     for (int i = 0; i < weather_str_number; ++i) {
         PrintDate(&weather[i], output_file);
         PrintDayTemperature(weather[i].day_temp.min_val, weather[i].day_temp.max_val, &weather[i], output_file);
-        PrintFeelingTemperature((weather[i].temp_feels_like.min_val + weather[i].temp_feels_like.max_val)/2,
-                                weather[i].temp_feels_like.max_val, weather[i].temp_feels_like.min_val,
-                                (weather[i].day_temp.min_val + weather[i].day_temp.max_val)/2, output_file);
+        PrintFeelingTemperature(temp_feels_like.max_val, weather[i].temp_feels_like.min_val, output_file);
         PrintNightTemperature(weather[i].night_temp.min_val, weather[i].night_temp.max_val, &weather[i], output_file);
         PrintPressure(&weather[i], output_file);
         PrintPrecipitation(output_file, &weather[i]);
