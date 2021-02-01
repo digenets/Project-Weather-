@@ -30,9 +30,9 @@ StringArray ConvertWindDirection(StringArray directions, int word_ending_type) {
         } else if (word_ending_type == WORD_ENDING_NEUTER) {
             word_ending = word_ending_n;
         }
-        int new_size = (strlen(directions_str.array[i]) + strlen(word_ending_m) + 1) * sizeof(char);
+        int new_size = (strlen(directions_str.array[i]) + strlen(word_ending) + 1) * sizeof(char);
         char* concated = (char*) malloc(new_size); // +1 символ под \0
-        memcpy(concated, directions_str.array[i], (strlen(directions_str.array[i])));
+        memcpy(concated, directions_str.array[i], (strlen(directions_str.array[i]) + 1));
         strcat(concated, word_ending);
         directions_str.array[i] = concated;
     }
