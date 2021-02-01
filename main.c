@@ -14,6 +14,7 @@
 #include "average_temperature.h"
 #include "temperature_pinting.h"
 #include "print_pressure.h"
+#include "print_felling_temperature.h"
 
 #define INPUT_MAX_LEN 200
 #define TEST "test"
@@ -111,8 +112,9 @@ int main(int argc, char** argv) {
 
     FILE* output_file = fopen(argv[2], "wt");
     for (int i = 0; i < weather_str_number; ++i) {
-        PrintDate(weather[i].date.day, weather[i].date.month, weather[i].date.year, &weather[i], output_file);
+        PrintDate(&weather[i], output_file);
         PrintDayTemperature(weather[i].day_temp.min_val, weather[i].day_temp.max_val, &weather[i], output_file);
+        PrintFeelingTemperature(temp_feels_like.max_val, weather[i].temp_feels_like.min_val, output_file);
         PrintNightTemperature(weather[i].night_temp.min_val, weather[i].night_temp.max_val, &weather[i], output_file);
         PrintPressure(&weather[i], output_file);
         PrintPrecipitation(output_file, &weather[i]);
