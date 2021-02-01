@@ -112,7 +112,7 @@ int main(int argc, char** argv) {
 
     FILE* output_file = fopen(argv[2], "wt");
     for (int i = 0; i < weather_str_number; ++i) {
-        PrintDate(weather[i].date.day, weather[i].date.month, weather[i].date.year, &weather[i], output_file);
+        PrintDate(&weather[i], output_file);
         PrintDayTemperature(weather[i].day_temp.min_val, weather[i].day_temp.max_val, &weather[i], output_file);
         PrintFeelingTemperature((weather[i].temp_feels_like.min_val + weather[i].temp_feels_like.max_val)/2,
                                 weather[i].temp_feels_like.max_val, weather[i].temp_feels_like.min_val,
