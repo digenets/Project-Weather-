@@ -14,6 +14,7 @@
 #include "average_temperature.h"
 #include "temperature_pinting.h"
 #include "print_pressure.h"
+#include "print_felling_temperature.h"
 
 #define INPUT_MAX_LEN 200
 #define TEST "test"
@@ -104,15 +105,18 @@ int main(int argc, char** argv) {
     }
 
     char* path = argv[1];
-    FILE* input_file = fopen(path, "rt");
+    FILE* input_file = fopen("C:/Userfiles/CLionProjects/Project-Weather-/weather_input.txt", "rt");
     int weather_str_number = 0;
     fscanf(input_file, "%d\n", &weather_str_number);
     WEATHER* weather = ParseInput(input_file, weather_str_number);
 
-    FILE* output_file = fopen(argv[2], "wt");
+    FILE* output_file = fopen("C:/Userfiles/CLionProjects/Project-Weather-/weather_output.txt", "wt");
     for (int i = 0; i < weather_str_number; ++i) {
         PrintDate(weather[i].date.day, weather[i].date.month, weather[i].date.year, &weather[i], output_file);
         PrintDayTemperature(weather[i].day_temp.min_val, weather[i].day_temp.max_val, &weather[i], output_file);
+        PrintFeelingTemperature((weather[i].temp_feels_like.min_val + weather[i].temp_feels_like.max_val)/2,
+                                weather[i].temp_feels_like.max_val, weather[i].temp_feels_like.min_val,
+                                (weather[i].day_temp.min_val + weather[i].day_temp.max_val)/2, output_file);
         PrintNightTemperature(weather[i].night_temp.min_val, weather[i].night_temp.max_val, &weather[i], output_file);
         PrintPressure(&weather[i], output_file);
         PrintPrecipitation(output_file, &weather[i]);
