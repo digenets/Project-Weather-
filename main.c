@@ -115,7 +115,11 @@ int main(int argc, char** argv) {
         PrintDayTemperature(weather[i].day_temp.min_val, weather[i].day_temp.max_val, &weather[i], output_file);
         PrintNightTemperature(weather[i].night_temp.min_val, weather[i].night_temp.max_val, &weather[i], output_file);
         PrintPressure(&weather[i], output_file);
-        PrintPrecipitation(output_file, &weather[i]);
+        if (i > 0) {
+            PrintPrecipitation(output_file, weather[i].precipitation, weather[i-1].precipitation);
+        } else {
+            PrintPrecipitation(output_file, weather[i].precipitation, NULL);
+        }
         if (i > 0) {
             PrintWind(output_file, &weather[i].wind, &weather[i-1].wind);
         } else {

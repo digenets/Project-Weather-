@@ -3,6 +3,6 @@
 
 #include "weather.h"
 
-void PrintPrecipitation(FILE *output_file, WEATHER* weather);
+void PrintPrecipitation(FILE* output_file, char* precipitation, char* prev_day_precipitation);
 
 #endif //PROJECT_WEATHER__PRECIPITATION_PRINTING_H
