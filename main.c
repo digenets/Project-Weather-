@@ -85,7 +85,10 @@ WEATHER* ParseInput(FILE* file, int strings_number) {
         int pressure = atoi(pressure_str);
 
         char* earth_phenom_str = input_split.array[9];
-        earth_phenom_str[strlen(earth_phenom_str) - 1] = '\0';
+        int last_index = strlen(earth_phenom_str) - 1;
+        if (earth_phenom_str[last_index] == '\n') {
+            earth_phenom_str[strlen(earth_phenom_str) - 1] = '\0';
+        }
         StringArray earth_phenomena = Split(earth_phenom_str, ',');
 
         WEATHER weather = {date, night_temp, day_temp, temp_feels, precipitation, wind, pressure, earth_phenomena};
