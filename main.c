@@ -112,92 +112,20 @@ int main(int argc, char** argv) {
 
     FILE* output_file = fopen(argv[2], "wt");
     for (int i = 0; i < weather_str_number; ++i) {
-        switch (rand() % 5) {
-            case 0:
-                PrintDate(&weather[i], output_file);
-                PrintDayTemperature(weather[i].day_temp.min_val, weather[i].day_temp.max_val, &weather[i], output_file);
-                PrintFeelingTemperature(weather[i].temp_feels_like.min_val, weather[i].temp_feels_like.max_val,
-                                        weather[i].day_temp.min_val, weather[i].day_temp.max_val, output_file);
-                PrintNightTemperature(weather[i].night_temp.min_val, weather[i].night_temp.max_val, &weather[i],
-                                      output_file);
-                PrintPressure(&weather[i], output_file);
-                PrintPrecipitation(output_file, &weather[i]);
-                if (i > 0) {
-                    PrintWind(output_file, &weather[i].wind, &weather[i - 1].wind);
-                } else {
-                    PrintWind(output_file, &weather[i].wind, NULL);
-                }
-                fprintf(output_file, "\n");
-                break;
-
-            case 1:
-                PrintDate(&weather[i], output_file);
-                PrintDayTemperature(weather[i].day_temp.min_val, weather[i].day_temp.max_val, &weather[i], output_file);
-                PrintFeelingTemperature(weather[i].temp_feels_like.min_val, weather[i].temp_feels_like.max_val,
-                                        weather[i].day_temp.min_val, weather[i].day_temp.max_val, output_file);
-                PrintNightTemperature(weather[i].night_temp.min_val, weather[i].night_temp.max_val, &weather[i],
-                                      output_file);
-
-                PrintPrecipitation(output_file, &weather[i]);
-                if (i > 0) {
-                    PrintWind(output_file, &weather[i].wind, &weather[i - 1].wind);
-                } else {
-                    PrintWind(output_file, &weather[i].wind, NULL);
-                }
-                PrintPressure(&weather[i], output_file);
-                fprintf(output_file, "\n");
-                break;
-            case 2:
-                PrintDate(&weather[i], output_file);
-                PrintDayTemperature(weather[i].day_temp.min_val, weather[i].day_temp.max_val, &weather[i], output_file);
-                PrintFeelingTemperature(weather[i].temp_feels_like.min_val, weather[i].temp_feels_like.max_val,
-                                        weather[i].day_temp.min_val, weather[i].day_temp.max_val, output_file);
-                PrintPrecipitation(output_file, &weather[i]);
-                if (i > 0) {
-                    PrintWind(output_file, &weather[i].wind, &weather[i - 1].wind);
-                } else {
-                    PrintWind(output_file, &weather[i].wind, NULL);
-                }
-                PrintPressure(&weather[i], output_file);
-                PrintNightTemperature(weather[i].night_temp.min_val, weather[i].night_temp.max_val, &weather[i],
-                                      output_file);
-                fprintf(output_file, "\n");
-                break;
-            case 3:
-                PrintDate(&weather[i], output_file);
-                PrintDayTemperature(weather[i].day_temp.min_val, weather[i].day_temp.max_val, &weather[i], output_file);
-                PrintFeelingTemperature(weather[i].temp_feels_like.min_val, weather[i].temp_feels_like.max_val,
-                                        weather[i].day_temp.min_val, weather[i].day_temp.max_val, output_file);
-                PrintNightTemperature(weather[i].night_temp.min_val, weather[i].night_temp.max_val, &weather[i],
-                                      output_file);
-                PrintPressure(&weather[i], output_file);
-                if (i > 0) {
-                    PrintWind(output_file, &weather[i].wind, &weather[i - 1].wind);
-                } else {
-                    PrintWind(output_file, &weather[i].wind, NULL);
-                }
-                PrintPrecipitation(output_file, &weather[i]);
-
-                fprintf(output_file, "\n");
-                break;
-            case 4:
-                PrintDate(&weather[i], output_file);
-                PrintDayTemperature(weather[i].day_temp.min_val, weather[i].day_temp.max_val, &weather[i], output_file);
-                PrintFeelingTemperature(weather[i].temp_feels_like.min_val, weather[i].temp_feels_like.max_val,
-                                        weather[i].day_temp.min_val, weather[i].day_temp.max_val, output_file);
-                PrintNightTemperature(weather[i].night_temp.min_val, weather[i].night_temp.max_val, &weather[i],
-                                      output_file);
-                if (i > 0) {
-                    PrintWind(output_file, &weather[i].wind, &weather[i - 1].wind);
-                } else {
-                    PrintWind(output_file, &weather[i].wind, NULL);
-                }
-                PrintPrecipitation(output_file, &weather[i]);
-                PrintPressure(&weather[i], output_file);
-
-                fprintf(output_file, "\n");
-                break;
+        PrintDate(weather[i].date.day, weather[i].date.month, weather[i].date.year, &weather[i], output_file);
+        PrintDayTemperature(weather[i].day_temp.min_val, weather[i].day_temp.max_val, &weather[i], output_file);
+        PrintFeelingTemperature((weather[i].temp_feels_like.min_val + weather[i].temp_feels_like.max_val)/2,
+                                weather[i].temp_feels_like.max_val, weather[i].temp_feels_like.min_val,
+                                (weather[i].day_temp.min_val + weather[i].day_temp.max_val)/2, output_file);
+        PrintNightTemperature(weather[i].night_temp.min_val, weather[i].night_temp.max_val, &weather[i], output_file);
+        PrintPressure(&weather[i], output_file);
+        PrintPrecipitation(output_file, &weather[i]);
+        if (i > 0) {
+            PrintWind(output_file, &weather[i].wind, &weather[i-1].wind);
+        } else {
+            PrintWind(output_file, &weather[i].wind, NULL);
         }
+        fprintf(output_file, "\n");
     }
 
     fclose(input_file);
