@@ -2,7 +2,7 @@
 #include "weekday.h"
 #include "weather.h"
 #include "month_name.h"
-void PrintDate(int day, int mounth, int year, WEATHER* weather, FILE* out){
+void PrintDate(WEATHER* weather, FILE* out){
     int day_of_week_number = weekday(weather->date.year, weather->date.month, weather->date.day);
     switch (rand()%4) {
         case 0:
