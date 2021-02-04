@@ -4,6 +4,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-void PrintFeelingTemperature(int feelling_temperature, int max_feeling, int min_feeling, int average_day_temperature, FILE * out);
+void PrintFeelingTemperature(int min_feeling, int max_feeling, int day_min, int day_max, FILE * out);
 
 #endif //PROJECT_WEATHER__PRINT_FELLING_TEMPERATURE_H
