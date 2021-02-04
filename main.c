@@ -15,6 +15,7 @@
 #include "temperature_printing.h"
 #include "print_pressure.h"
 #include "print_feeling_temperature.h"
+#include "earth_phenom_printing.h"
 
 #define INPUT_MAX_LEN 200
 #define TEST "test"
@@ -131,7 +132,9 @@ int main(int argc, char** argv) {
                     PrintPrecipitation(output_file, weather[i].precipitation, NULL);
                     PrintWind(output_file, &weather[i].wind, NULL);
                 }
+                PrintEarthPhenomena(output_file, weather[i].earth_phenomena);
                 fprintf(output_file, "\n\n");
+                break;
             case 1:
                 PrintDate(&weather[i].date, output_file);
                 PrintDayTemperature(weather[i].day_temp.min_val, weather[i].day_temp.max_val, &weather[i].date, output_file);
@@ -147,7 +150,9 @@ int main(int argc, char** argv) {
                     PrintPrecipitation(output_file, weather[i].precipitation, NULL);
                     PrintWind(output_file, &weather[i].wind, NULL);
                 }
+                PrintEarthPhenomena(output_file, weather[i].earth_phenomena);
                 fprintf(output_file, "\n\n");
+                break;
             case 2:
                 PrintDate(&weather[i].date, output_file);
                 PrintDayTemperature(weather[i].day_temp.min_val, weather[i].day_temp.max_val, &weather[i].date, output_file);
@@ -164,8 +169,9 @@ int main(int argc, char** argv) {
                     PrintWind(output_file, &weather[i].wind, NULL);
                     PrintPrecipitation(output_file, weather[i].precipitation, NULL);
                 }
-
+                PrintEarthPhenomena(output_file, weather[i].earth_phenomena);
                 fprintf(output_file, "\n\n");
+                break;
             case 3:
                 PrintDate(&weather[i].date, output_file);
                 PrintDayTemperature(weather[i].day_temp.min_val, weather[i].day_temp.max_val, &weather[i].date, output_file);
@@ -181,7 +187,9 @@ int main(int argc, char** argv) {
                     PrintWind(output_file, &weather[i].wind, NULL);
                     PrintPrecipitation(output_file, weather[i].precipitation, NULL);
                 }
+                PrintEarthPhenomena(output_file, weather[i].earth_phenomena);
                 fprintf(output_file, "\n\n");
+                break;
             case 4:
                 PrintDate(&weather[i].date, output_file);
                 PrintDayTemperature(weather[i].day_temp.min_val, weather[i].day_temp.max_val, &weather[i].date, output_file);
@@ -197,7 +205,9 @@ int main(int argc, char** argv) {
                     PrintWind(output_file, &weather[i].wind, NULL);
                 }
                 PrintPressure(&weather[i], output_file);
+                PrintEarthPhenomena(output_file, weather[i].earth_phenomena);
                 fprintf(output_file, "\n\n");
+                break;
             case 5:
                 PrintDate(&weather[i].date, output_file);
                 PrintDayTemperature(weather[i].day_temp.min_val, weather[i].day_temp.max_val, &weather[i].date, output_file);
@@ -212,10 +222,11 @@ int main(int argc, char** argv) {
                     PrintWind(output_file, &weather[i].wind, NULL);
                     PrintPrecipitation(output_file, weather[i].precipitation, NULL);
                 }
+                PrintEarthPhenomena(output_file, weather[i].earth_phenomena);
                 PrintPressure(&weather[i], output_file);
                 fprintf(output_file, "\n\n");
+                break;
         }
-
     }
 
     fclose(input_file);
