@@ -108,12 +108,12 @@ int main(int argc, char** argv) {
     }
 
     char* path = argv[1];
-    FILE* input_file = fopen("C:/Userfiles/CLionProjects/Project-Weather-/weather_input.txt", "rt");
+    FILE* input_file = fopen(path, "rt");
     int weather_str_number = 0;
     fscanf(input_file, "%d\n", &weather_str_number);
     WEATHER* weather = ParseInput(input_file, weather_str_number);
 
-    FILE* output_file = fopen("C:/Userfiles/CLionProjects/Project-Weather-/weather_output.txt", "wt");
+    FILE* output_file = fopen(argv[2], "wt");
     for (int i = 0; i < weather_str_number; ++i) {
         switch (rand()%5) {
             case 0:
