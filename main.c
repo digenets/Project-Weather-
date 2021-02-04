@@ -85,7 +85,10 @@ WEATHER* ParseInput(FILE* file, int strings_number) {
         int pressure = atoi(pressure_str);
 
         char* earth_phenom_str = input_split.array[9];
-        earth_phenom_str[strlen(earth_phenom_str) - 1] = '\0';
+        int last_index = strlen(earth_phenom_str) - 1;
+        if (earth_phenom_str[last_index] == '\n') {
+            earth_phenom_str[strlen(earth_phenom_str) - 1] = '\0';
+        }
         StringArray earth_phenomena = Split(earth_phenom_str, ',');
 
         WEATHER weather = {date, night_temp, day_temp, temp_feels, precipitation, wind, pressure, earth_phenomena};
@@ -115,13 +118,14 @@ int main(int argc, char** argv) {
         PrintDayTemperature(weather[i].day_temp.min_val, weather[i].day_temp.max_val, &weather[i], output_file);
         PrintNightTemperature(weather[i].night_temp.min_val, weather[i].night_temp.max_val, &weather[i], output_file);
         PrintPressure(&weather[i], output_file);
-        PrintPrecipitation(output_file, &weather[i]);
         if (i > 0 && AreConsecutiveDates(&weather[i].date, &weather[i - 1].date)) {
-            PrintWind(output_file, &weather[i].wind, &weather[i - 1].wind);
+            PrintPrecipitation(output_file, weather[i].precipitation, weather[i-1].precipitation);
+            PrintWind(output_file, &weather[i].wind, &weather[i-1].wind);
         } else {
+            PrintPrecipitation(output_file, weather[i].precipitation, NULL);
             PrintWind(output_file, &weather[i].wind, NULL);
         }
-        fprintf(output_file, "\n");
+        fprintf(output_file, "\n\n");
     }
 
     fclose(input_file);

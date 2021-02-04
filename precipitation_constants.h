@@ -2,13 +2,24 @@
 
 #include "base.h"
 
+#define NO_PRECIPITATION "-"
 #define SNOW "снег"
 #define RAIN "дождь"
+#define SNOW_WITH_RAIN "снег с дождём"
 #define HAIL "град"
-#define THUNDER "гроза"
 
 StringArray CommentsNoPrecipitation();
+StringArray CommentsNoPrecipitationAgain();
+
 StringArray CommentsRain();
+StringArray CommentsRainAgain();
+
 StringArray CommentsSnow();
-StringArray CommentsThunder();
+StringArray CommentsSnowAgain();
+
+StringArray CommentsSnowWithRain();
+StringArray CommentsSnowWithRainAgain();
+
 StringArray CommentsHail();
+StringArray CommentsHailAgain();
+
