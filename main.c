@@ -116,8 +116,8 @@ int main(int argc, char** argv) {
         PrintNightTemperature(weather[i].night_temp.min_val, weather[i].night_temp.max_val, &weather[i], output_file);
         PrintPressure(&weather[i], output_file);
         PrintPrecipitation(output_file, &weather[i]);
-        if (i > 0) {
-            PrintWind(output_file, &weather[i].wind, &weather[i-1].wind);
+        if (i > 0 && AreConsecutiveDates(&weather[i].date, &weather[i - 1].date)) {
+            PrintWind(output_file, &weather[i].wind, &weather[i - 1].wind);
         } else {
             PrintWind(output_file, &weather[i].wind, NULL);
         }

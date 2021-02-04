@@ -29,6 +29,25 @@ void Test() {
         printf("wrong parsing numbers < 0: %d %d, expected: -24 -20\n", min_val, max_val);
         abort();
     }
+
+    // test 3
+    DATE cur_date1 = {13, 1, 2021};
+    DATE cmp_date1 = {12, 1, 2021};
+    if (!AreConsecutiveDates(&cur_date1, &cmp_date1)) {
+        printf("test 3, expected true, but false: cur %d.%d.%d, compare with %d.%d.%d",
+               cur_date1.day, cur_date1.month, cur_date1.year,
+               cmp_date1.day, cmp_date1.month, cmp_date1.year);
+        abort();
+    }
+
+    DATE cur_date2 = {1, 1, 2021};
+    DATE cmp_date2 = {31, 12, 2020};
+    if (!AreConsecutiveDates(&cur_date2, &cmp_date2)) {
+        printf("test 3, expected true, but false: cur %d.%d.%d, compare with %d.%d.%d",
+               cur_date2.day, cur_date2.month, cur_date2.year,
+               cmp_date2.day, cmp_date2.month, cmp_date2.year);
+        abort();
+    }
 }
 
 #endif //PROJECT_WEATHER__TEST_H
