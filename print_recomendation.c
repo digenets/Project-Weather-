@@ -1,87 +1,168 @@
 #include "print_recomendation.h"
 #include "wind_printing.h"
+#include "precipitation_constants.h"
 
-#define SIZE 1000
+StringArray Introductory() {
+    StringArray introductory = CreateStringArray(5);
+    introductory.array[0] = "Вследствие этого, ";
+    introductory.array[1] = "Поэтому, ";
+    introductory.array[2] = "Вероятнее всего, ";
+    introductory.array[3] = "Согласно прогнозу погоды, ";
+    introductory.array[4] = "В общем, ";
+    return introductory;
+}
 
-void PrintRecommendation(WEATHER * weather, FILE * out) {
-    char introductory[SIZE] = {"Вследствии этого, "},
-            introductory1[SIZE] = {"Так как прогноз погоды показывает "},
-            introductory2[SIZE] = {"Поэтому, "},
-            introductory3[SIZE] = {"Вероятнее всего, "},
-            introductory4[SIZE] = {"В общем, "};
+StringArray RecommendationPhrase() {
+    StringArray recommendation_phrases = CreateStringArray(4);
+    recommendation_phrases.array[0] = "хотим вам порекомендовать эти вещи:";
+    recommendation_phrases.array[1] = "мы рекомендуем вам надеть это:";
+    recommendation_phrases.array[2] = "можете надеть:";
+    recommendation_phrases.array[3] = "предоставим вам эти вещи на выход:";
+    return recommendation_phrases;
+}
 
-    char recom[SIZE] = {"хотим вам порекомендовать эти вещи:"},
-            recom1[SIZE] = {"мы рекомендуем вам надеть это:"},
-            recom2[SIZE] = {"можете надеть:"},
-            recom3[SIZE] = {"предоставим вам эти вещи на выход:"};
+StringArray VeryCold() {
+    StringArray phrases_very_cold = CreateStringArray(4);
+    phrases_very_cold.array[0] = "подумайте, а стоит ли завтра выходить на улицу?";
+    phrases_very_cold.array[1] = "советуем вам остаться дома";
+    phrases_very_cold.array[2] = "мы крайне не рекомендуем выходить на улицу в такую погоду";
+    phrases_very_cold.array[3] = "в такую погоду свои дома сидят";
+    return phrases_very_cold;
+}
 
+StringArray VeryColdWinterHat() {
+    StringArray winter_hat = CreateStringArray(3);
+    winter_hat.array[0] = "на голову возьмите шапку с мехом";
+    winter_hat.array[1] = "на голову наденьте шапку-ушанку";
+    winter_hat.array[2] = "без теплой шапки вам делать нечего";
+    return winter_hat;
+}
 
-    char very_cold[SIZE] = {"подумайте, а стоит ли завтра выходить на улицу?"},
-            very_cold1[SIZE] = {"советуем вам остаться дома"},
-            very_cold2[SIZE] = {"мы крайне не рекомендуем выходить на улицу в такую погоду"},
-            very_cold3[SIZE] = {"в такую погоду свои дома сидят"};
+StringArray VeryColdGloves() {
+    StringArray winter_gloves = CreateStringArray(3);
+    winter_gloves.array[0] = "вязанные перчатки";
+    winter_gloves.array[1] = "варежки";
+    winter_gloves.array[2] = "утепленные перчатки";
+    return winter_gloves;
+}
 
-    char very_coldwinterhat[SIZE] = {"на голову возьмите шапку с мехом"},
-            very_coldwinterhat1[SIZE] = {"на голову наденьте шапку-ушанку"},
-            very_coldwinterhat2[SIZE] = {"без теплой шапки вам делать нечего"};
+StringArray VeryColdBoots() {
+    StringArray very_cold_boots = CreateStringArray(2);
+    very_cold_boots.array[0] = "валенки";
+    very_cold_boots.array[1] = "теплые ботинки";
+    return very_cold_boots;
+}
 
-    char very_coldgloves[SIZE] = {"вязанные перчатки"},
-            very_coldgloves1[SIZE] = {"варежки"},
-            very_coldgloves2[SIZE] = {"утепленные перчатки"};
+StringArray VeryColdClothes() {
+    StringArray very_cold_clothes = CreateStringArray(2);
+    very_cold_clothes.array[0] = "и пуховик";
+    very_cold_clothes.array[1] = "зимнюю куртку";
+    return very_cold_clothes;
+}
 
-    char very_coldboots[SIZE] = {"валенки"},
-            very_coldboots1[SIZE] = {"теплые ботинки"};
+StringArray CoolWinterHat() {
+    StringArray cool_winter_hat = CreateStringArray(3);
+    cool_winter_hat.array[0] = "накиньте капюшон и кепку";
+    cool_winter_hat.array[1] = "используйте капюшон куртки и легкий шарф";
+    cool_winter_hat.array[2] = "беретку";
+    return cool_winter_hat;
+}
 
-    char very_coldclothes[SIZE] = {"и пуховик"},
-            very_coldclothes1[SIZE] = {"зимнюю куртку"};
+StringArray CoolClothes() {
+    StringArray cool_clothes = CreateStringArray(3);
+    cool_clothes.array[0] = "куртку с джинсами";
+    cool_clothes.array[1] = "жилетку";
+    cool_clothes.array[2] = "кожаную куртку";
+    return cool_clothes;
+}
 
+StringArray CoolBoots() {
+    StringArray cool_boots = CreateStringArray(2);
+    cool_boots.array[0] = "ботинки";
+    cool_boots.array[1] = "кроссовки";
+    return cool_boots;
+}
 
-    char coolwinterhat[SIZE] = "накиньте капюшон и кепку",
-            coolwinterhat1[SIZE] = "используйте капюшон куртки и легкий шарф",
-            coolwinterhat2[SIZE] = "беретку";
+StringArray CoolSpecial() {
+    StringArray cool_special = CreateStringArray(3);
+    cool_special.array[0] = "Вместо капюшона возьмите зонт или дождевик.";
+    cool_special.array[1] = "И возьмите дождевик.";
+    cool_special.array[2] = "Также возьмите зонт.";
+    return cool_special;
+}
 
-    char coolclothes[SIZE] = "куртку с джинсами",
-            coolclothes1[SIZE] = "жилетку",
-            coolclothes2[SIZE] = "кожаная куртка";
+StringArray CloudyWinterHat() {
+    StringArray cloudy_winter_hat = CreateStringArray(3);
+    cloudy_winter_hat.array[0] = "шапку";
+    cloudy_winter_hat.array[1] = "теплый головной убор";
+    cloudy_winter_hat.array[2] = "на голову возьмите беретку с шарфом";
+    return cloudy_winter_hat;
+}
 
-    char coolboots[SIZE] = "ботинки",
-            coolboots1[SIZE] = "ботинки",
-            coolboots2[SIZE] = "кроссовки";
+StringArray CloudyClothes() {
+    StringArray cloudy_clothes = CreateStringArray(2);
+    cloudy_clothes.array[0] = "пальто";
+    cloudy_clothes.array[1] = "теплую куртку";
+    return cloudy_clothes;
+}
 
-/* char coolspecial [SIZE]       = ", вместо капюшона возмите зонт или дождевик.",
-     coolspecial1 [SIZE]      = ", дождевик.",
-     coolspecial2 [SIZE]      = ", зонт.";
-*/
+StringArray CloudyBoots() {
+    StringArray cloudy_boots = CreateStringArray(2);
+    cloudy_boots.array[0] = "ботинки";
+    cloudy_boots.array[1] = "осенне-весенние ботинки";
+    return cloudy_boots;
+}
 
+StringArray CloudyGloves() {
+    StringArray cloudy_gloves = CreateStringArray(2);
+    cloudy_gloves.array[0] = "кожаные перчатки";
+    cloudy_gloves.array[1] = "теплые перчатки";
+    return cloudy_gloves;
+}
 
-    char cloudywinterhat[SIZE] = {"шапку"},
-            cloudywinterhat1[SIZE] = {"теплый головной убор"},
-            cloudywinterhat2[SIZE] = {"на голову возьмите беретку с шарфом"};
+StringArray WarmCap() {
+    StringArray warm_cap = CreateStringArray(3);
+    warm_cap.array[0] = "можете взять шарфик";
+    warm_cap.array[1] = "кепку";
+    warm_cap.array[2] = "повязку";
+    return warm_cap;
+}
 
-    char cloudyclothes[SIZE] = {"пальто"},
-            cloudyclothes1[SIZE] = {"теплую куртку"};
+StringArray WarmClothes() {
+    StringArray warm_clothes = CreateStringArray(3);
+    warm_clothes.array[0] = "футболку с джинсами";
+    warm_clothes.array[1] = "и ветровку";
+    warm_clothes.array[2] = "и шорты";
+    return warm_clothes;
+}
 
-    char cloudyboots[SIZE] = {"ботинки"},
-            cloudyboots1[SIZE] = {"осенне-весенние ботинки"};
+StringArray WarmBoots() {
+    StringArray warm_boots = CreateStringArray(3);
+    warm_boots.array[0] = "кеды";
+    warm_boots.array[1] = "кроссовки";
+    warm_boots.array[2] = "сандалии";
+    return warm_boots;
+}
 
-    char cloudygloves1[SIZE] = {"кожаные перчатки"},
-            cloudygloves2[SIZE] = {"теплые перчатки"};
-
-
-    char warmcap[SIZE] = {"можете взять шарфик"},
-            warmcap1[SIZE] = {"кепку"},
-            warmcap2[SIZE] = {"повязку"};
-
-
-    char warmclothes[SIZE] = {"футболку с джинсами"},
-            warmclothes1[SIZE] = {"и ветровку"},
-            warmclothes2[SIZE] = {"и шорты"};
-
-
-    char warmboots[SIZE] = {"кеды"},
-            warmboots1[SIZE] = {"кроссовки"},
-            warmboots2[SIZE] = {"сандалии"};
-
+void PrintRecommendation(WEATHER* weather, FILE* out) {
+    StringArray introductory = Introductory();
+    StringArray recommendation_phrase = RecommendationPhrase();
+    StringArray very_cold = VeryCold();
+    StringArray very_cold_winter_hat = VeryColdWinterHat();
+    StringArray very_cold_gloves = VeryColdGloves();
+    StringArray very_cold_boots = VeryColdBoots();
+    StringArray very_cold_clothes = VeryColdClothes();
+    StringArray cool_winter_hat = CoolWinterHat();
+    StringArray cool_clothes = CoolClothes();
+    StringArray cool_boots = CoolBoots();
+    StringArray cool_special = CoolSpecial();
+    StringArray cloudy_winter_hat = CloudyWinterHat();
+    StringArray cloudy_clothes = CloudyClothes();
+    StringArray cloudy_boots = CloudyBoots();
+    StringArray cloudy_gloves = CloudyGloves();
+    StringArray warm_cap = WarmCap();
+    StringArray warm_clothes = WarmClothes();
+    StringArray warm_boots = WarmBoots();
 
     int koef_t = 0;
     int koef_s = 0;
@@ -90,23 +171,8 @@ void PrintRecommendation(WEATHER * weather, FILE * out) {
     int average_temperature = (weather->day_temp.min_val + weather->day_temp.max_val) / 2;
     int average_speed = GetAverageSpeed(weather->wind.speed_min_val, weather->wind.speed_max_val);
 
-    switch (rand() % 5) {
-        case 0:
-            fprintf(out, "%s", introductory);
-            break;
-        case 1:
-            fprintf(out, "%s", introductory1);
-            break;
-        case 2:
-            fprintf(out, "%s", introductory2);
-            break;
-        case 3:
-            fprintf(out, "%s", introductory3);
-            break;
-        case 4:
-            fprintf(out, "%s", introductory4);
-            break;
-    }
+    int index = rand() % introductory.size;
+    fprintf(out, "%s", introductory.array[index]);
 
     if (average_temperature < -30)
         koef_t = 0;
@@ -136,217 +202,86 @@ void PrintRecommendation(WEATHER * weather, FILE * out) {
 
     koef_g = koef_s + koef_t;
 
-    // сли совсем плохая погода - советуем остаться дома
-    // верхняя одежда и ботинки clothes - boots
-    if ((koef_t == 0) || (koef_s == 0) || (koef_t == 10) || (koef_g <= 4)) {
-        switch (rand() % 4) { // stay home
-            case 0:
-                fprintf(out, "%s", very_cold);
-                break;
-            case 1:
-                fprintf(out, "%s", very_cold1);
-                break;
-            case 2:
-                fprintf(out, "%s", very_cold2);
-                break;
-            case 3:
-                fprintf(out, "%s", very_cold3);
-                break;
-        }
+    // если совсем плохая погода - советуем остаться дома
+    if ((koef_t == 0) || (koef_s == 0) || (koef_g <= 4)) {
+        int very_cold_index = rand() % very_cold.size;
+        fprintf(out, "%s", very_cold.array[very_cold_index]);
     }// верхняя одежда и ботинки clothes - boots
     else {
-        switch (rand() % 4) {
-            case 0:
-                fprintf(out, "%s", recom);
-                break;
-            case 1:
-                fprintf(out, "%s", recom1);
-                break;
-            case 2:
-                fprintf(out, "%s", recom2);
-                break;
-            case 3:
-                fprintf(out, "%s", recom3);
-                break;
-        }
+        int recommend_index = rand() % recommendation_phrase.size;
+        fprintf(out, "%s", recommendation_phrase.array[recommend_index]);
         fprintf(out, " ");
 
+        //  оч холодно но жить можно
         if (koef_g == 5) {
-            switch (rand() % 4) { //  оч холодно но жить можно
-                case 0:
-                    fprintf(out, "%s", very_coldwinterhat);
-                    break;
-                case 1:
-                    fprintf(out, "%s", very_coldwinterhat1);
-                    break;
-                case 2:
-                    fprintf(out, "%s", very_coldwinterhat2);
-                    break;
-                case 3:
-                    break;
-            }
+            int very_cold_hat_index = rand() % very_cold_winter_hat.size;
+            fprintf(out, "%s", very_cold_winter_hat.array[very_cold_hat_index]);
             fprintf(out, ", ");
 
-            switch (rand() % 4) { //  оч холодно но жить можно
-                case 0:
-                    fprintf(out, "%s", very_coldgloves);
-                    break;
-                case 1:
-                    fprintf(out, "%s", very_coldgloves1);
-                    break;
-                case 2:
-                    fprintf(out, "%s", very_coldgloves2);
-                    break;
-                case 3:
-                    break;
-            }
+            int very_cold_gloves_index = rand() % very_cold_gloves.size;
+            fprintf(out, "%s", very_cold_gloves.array[very_cold_gloves_index]);
             fprintf(out, ", ");
 
-            switch (rand() % 2) { //  оч холодно но жить можно
-                case 0:
-                    fprintf(out, "%s", very_coldboots);
-                    break;
-                case 1:
-                    fprintf(out, "%s", very_coldboots1);
-                    break;
-            }
+            int very_cold_boots_index = rand() % very_cold_boots.size;
+            fprintf(out, "%s", very_cold_boots.array[very_cold_boots_index]);
             fprintf(out, ", ");
 
-            switch (rand() % 2) { //  оч холодно но жить можно
-                case 0:
-                    fprintf(out, "%s", very_coldclothes);
-                    break;
-                case 1:
-                    fprintf(out, "%s", very_coldclothes1);
-                    break;
-            }
+            int very_cold_clothes_index = rand() % very_cold_clothes.size;
+            fprintf(out, "%s", very_cold_clothes.array[very_cold_clothes_index]);
             fprintf(out, ". ");
 
 
+        // просто холодно
         } else if (koef_g == 6 || koef_g == 7 || koef_g == 8) {
-            switch (rand() % 3) { //  просто холодно
-                case 0:
-                    fprintf(out, "%s", cloudywinterhat);
-                    break;
-                case 1:
-                    fprintf(out, "%s", cloudywinterhat1);
-                    break;
-                case 2:
-                    fprintf(out, "%s", cloudywinterhat2);
-                    break;
-            }
+            int cloudy_winter_hat_index = rand() % cloudy_winter_hat.size;
+            fprintf(out, "%s", cloudy_winter_hat.array[cloudy_winter_hat_index]);
             fprintf(out, ", ");
 
-            switch (rand() % 2) { //  просто холодно
-                case 0:
-                    fprintf(out, "%s", cloudygloves1);
-                    break;
-                case 1:
-                    fprintf(out, "%s", cloudygloves2);
-                    break;
-            }
+            int cloudy_gloves_index = rand() % cloudy_gloves.size;
+            fprintf(out, "%s", cloudy_gloves.array[cloudy_gloves_index]);
+
             fprintf(out, ", ");
 
-            switch (rand() % 2) { //  просто холодно
-                case 0:
-                    fprintf(out, "%s", cloudyboots);
-                    break;
-                case 1:
-                    fprintf(out, "%s", cloudyboots1);
-                    break;
-            }
+            int cloudy_boots_index = rand() % cloudy_boots.size;
+            fprintf(out, "%s", cloudy_boots.array[cloudy_boots_index]);
             fprintf(out, ", ");
 
-            switch (rand() % 2) { //  просто холодно
-                case 0:
-                    fprintf(out, "%s", cloudyclothes);
-                    break;
-                case 1:
-                    fprintf(out, "%s", cloudyclothes1);
-                    break;
-            }
+            int cloudy_clothes_index = rand() % cloudy_clothes.size;
+            fprintf(out, "%s", cloudy_clothes.array[cloudy_clothes_index]);
             fprintf(out, ". ");
 
         } else if ((koef_g == 9) || (koef_g == 10) || (koef_g == 11)) {
-            switch (rand() % 3) { //  просто холодно
-                case 0:
-                    fprintf(out, "%s", coolwinterhat);
-                    break;
-                case 1:
-                    fprintf(out, "%s", coolwinterhat1);
-                    break;
-                case 2:
-                    fprintf(out, "%s", coolwinterhat2);
-                    break;
-            }
+            int cool_winter_hat_index = rand() % cool_winter_hat.size;
+            fprintf(out, "%s", cool_winter_hat.array[cool_winter_hat_index]);
             fprintf(out, ", ");
 
-            switch (rand() % 3) { //  просто холодно
-                case 0:
-                    fprintf(out, "%s", coolboots);
-                    break;
-                case 1:
-                    fprintf(out, "%s", coolboots1);
-                    break;
-                case 2:
-                    fprintf(out, "%s", coolboots2);
-                    break;
-            }
+            int cool_boots_index = rand() % cool_boots.size;
+            fprintf(out, "%s", cool_boots.array[cool_boots_index]);
             fprintf(out, ", ");
 
-            switch (rand() % 3) { //  просто холодно
-                case 0:
-                    fprintf(out, "%s", coolclothes);
-                    break;
-                case 1:
-                    fprintf(out, "%s", coolclothes1);
-                    break;
-                case 2:
-                    fprintf(out, "%s", coolclothes2);
-                    break;
-            }
+            int cool_clothes_index = rand() % cool_clothes.size;
+            fprintf(out, "%s", cool_clothes.array[cool_clothes_index]);
             fprintf(out, ". ");
 
-
+        // тепло
         } else if (koef_g >= 12) {
-            switch (rand() % 3) { //  warm yeah
-                case 0:
-                    fprintf(out, "%s", warmcap);
-                    break;
-                case 1:
-                    fprintf(out, "%s", warmcap1);
-                    break;
-                case 2:
-                    fprintf(out, "%s", warmcap2);
-                    break;
-            }
+            int warm_cap_index = rand() % warm_cap.size;
+            fprintf(out, "%s", warm_cap.array[warm_cap_index]);
             fprintf(out, ", ");
 
-            switch (rand() % 3) {
-                case 0:
-                    fprintf(out, "%s", warmclothes);
-                    break;
-                case 1:
-                    fprintf(out, "%s", warmclothes1);
-                    break;
-                case 2:
-                    fprintf(out, "%s", warmclothes2);
-                    break;
-            }
+            int warm_clothes_index = rand() % warm_clothes.size;
+            fprintf(out, "%s", warm_clothes.array[warm_clothes_index]);
             fprintf(out, ", ");
 
-            switch (rand() % 3) {
-                case 0:
-                    fprintf(out, "%s", warmboots);
-                    break;
-                case 1:
-                    fprintf(out, "%s", warmboots1);
-                    break;
-                case 2:
-                    fprintf(out, "%s", warmboots2);
-                    break;
-            }
+            int warm_boots_index = rand() % warm_boots.size;
+            fprintf(out, "%s", warm_boots.array[warm_boots_index]);
             fprintf(out, ". ");
+        }
+
+        // если будет дождь
+        if (strcmp(weather->precipitation, RAIN) == 0) {
+            int cool_special_index = rand() % cool_special.size;
+            fprintf(out, "%s", cool_special.array[cool_special_index]);
         }
     }
 }
