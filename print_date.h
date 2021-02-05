@@ -1,3 +1,3 @@
 #pragma once
 
-void PrintDate(WEATHER * weather, FILE * out);
+void PrintDate(DATE* date, FILE * out);
