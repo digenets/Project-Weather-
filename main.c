@@ -108,13 +108,14 @@ int main(int argc, char** argv) {
         Test();
     }
 
-    char* path = argv[1];
-    FILE* input_file = fopen("C:/Userfiles/CLionProjects/Project-Weather-/weather_input.txt", "rt");
+    char* path_input = argv[1];
+    FILE* input_file = fopen(path_input, "rt");
     int weather_str_number = 0;
     fscanf(input_file, "%d\n", &weather_str_number);
     WEATHER* weather = ParseInput(input_file, weather_str_number);
 
-    FILE* output_file = fopen("C:/Userfiles/CLionProjects/Project-Weather-/weather_output.txt", "wt");
+    char* path_output = argv[2];
+    FILE* output_file = fopen(path_output, "wt");
     for (int i = 0; i < weather_str_number; ++i) {
         switch (rand()%5) {
             case 0:
@@ -122,8 +123,8 @@ int main(int argc, char** argv) {
                 PrintDayTemperature(weather[i].day_temp.min_val, weather[i].day_temp.max_val, &weather[i], output_file);
                 PrintNightTemperature(weather[i].night_temp.min_val, weather[i].night_temp.max_val, &weather[i],
                                       output_file);
-                PrintFeelingTemperature(weather->temp_feels_like.min_val, weather->temp_feels_like.max_val,
-                                        weather->day_temp.min_val, weather->day_temp.max_val, output_file);
+                PrintFeelingTemperature(weather[i].temp_feels_like.min_val, weather[i].temp_feels_like.max_val,
+                                        weather[i].day_temp.min_val, weather[i].day_temp.max_val, output_file);
                 PrintPressure(&weather[i], output_file);
                 if (i > 0 && AreConsecutiveDates(&weather[i].date, &weather[i - 1].date)) {
                     PrintPrecipitation(output_file, weather[i].precipitation, weather[i - 1].precipitation);
@@ -132,13 +133,14 @@ int main(int argc, char** argv) {
                     PrintPrecipitation(output_file, weather[i].precipitation, NULL);
                     PrintWind(output_file, &weather[i].wind, NULL);
                 }
-                PrintRecomendation(&weather[i], output_file);
+                PrintRecommendation(&weather[i], output_file);
                 fprintf(output_file, "\n\n");
+                break;
             case 1:
                 PrintDate(&weather[i], output_file);
                 PrintDayTemperature(weather[i].day_temp.min_val, weather[i].day_temp.max_val, &weather[i], output_file);
-                PrintFeelingTemperature(weather->temp_feels_like.min_val, weather->temp_feels_like.max_val,
-                                        weather->day_temp.min_val, weather->day_temp.max_val, output_file);
+                PrintFeelingTemperature(weather[i].temp_feels_like.min_val, weather[i].temp_feels_like.max_val,
+                                        weather[i].day_temp.min_val, weather[i].day_temp.max_val, output_file);
                 PrintNightTemperature(weather[i].night_temp.min_val, weather[i].night_temp.max_val, &weather[i],
                                       output_file);
                 PrintPressure(&weather[i], output_file);
@@ -149,15 +151,16 @@ int main(int argc, char** argv) {
                     PrintPrecipitation(output_file, weather[i].precipitation, NULL);
                     PrintWind(output_file, &weather[i].wind, NULL);
                 }
-                PrintRecomendation(&weather[i], output_file);
+                PrintRecommendation(&weather[i], output_file);
                 fprintf(output_file, "\n\n");
+                break;
             case 2:
                 PrintDate(&weather[i], output_file);
                 PrintDayTemperature(weather[i].day_temp.min_val, weather[i].day_temp.max_val, &weather[i], output_file);
                 PrintNightTemperature(weather[i].night_temp.min_val, weather[i].night_temp.max_val, &weather[i],
                                       output_file);
-                PrintFeelingTemperature(weather->temp_feels_like.min_val, weather->temp_feels_like.max_val,
-                                        weather->day_temp.min_val, weather->day_temp.max_val, output_file);
+                PrintFeelingTemperature(weather[i].temp_feels_like.min_val, weather[i].temp_feels_like.max_val,
+                                        weather[i].day_temp.min_val, weather[i].day_temp.max_val, output_file);
                 PrintPressure(&weather[i], output_file);
                 if (i > 0 && AreConsecutiveDates(&weather[i].date, &weather[i - 1].date)) {
                     PrintWind(output_file, &weather[i].wind, &weather[i - 1].wind);
@@ -167,13 +170,14 @@ int main(int argc, char** argv) {
                     PrintWind(output_file, &weather[i].wind, NULL);
                     PrintPrecipitation(output_file, weather[i].precipitation, NULL);
                 }
-                PrintRecomendation(&weather[i], output_file);
+                PrintRecommendation(&weather[i], output_file);
                 fprintf(output_file, "\n\n");
+                break;
             case 3:
                 PrintDate(&weather[i], output_file);
                 PrintDayTemperature(weather[i].day_temp.min_val, weather[i].day_temp.max_val, &weather[i], output_file);
-                PrintFeelingTemperature(weather->temp_feels_like.min_val, weather->temp_feels_like.max_val,
-                                        weather->day_temp.min_val, weather->day_temp.max_val, output_file);
+                PrintFeelingTemperature(weather[i].temp_feels_like.min_val, weather[i].temp_feels_like.max_val,
+                                        weather[i].day_temp.min_val, weather[i].day_temp.max_val, output_file);
                 PrintNightTemperature(weather[i].night_temp.min_val, weather[i].night_temp.max_val, &weather[i],
                                       output_file);
                 PrintPressure(&weather[i], output_file);
@@ -184,15 +188,16 @@ int main(int argc, char** argv) {
                     PrintWind(output_file, &weather[i].wind, NULL);
                     PrintPrecipitation(output_file, weather[i].precipitation, NULL);
                 }
-                PrintRecomendation(&weather[i], output_file);
+                PrintRecommendation(&weather[i], output_file);
                 fprintf(output_file, "\n\n");
+                break;
             case 4:
                 PrintDate(&weather[i], output_file);
                 PrintDayTemperature(weather[i].day_temp.min_val, weather[i].day_temp.max_val, &weather[i], output_file);
                 PrintNightTemperature(weather[i].night_temp.min_val, weather[i].night_temp.max_val, &weather[i],
                                       output_file);
-                PrintFeelingTemperature(weather->temp_feels_like.min_val, weather->temp_feels_like.max_val,
-                                        weather->day_temp.min_val, weather->day_temp.max_val, output_file);
+                PrintFeelingTemperature(weather[i].temp_feels_like.min_val, weather[i].temp_feels_like.max_val,
+                                        weather[i].day_temp.min_val, weather[i].day_temp.max_val, output_file);
                 if (i > 0 && AreConsecutiveDates(&weather[i].date, &weather[i - 1].date)) {
                     PrintPrecipitation(output_file, weather[i].precipitation, weather[i - 1].precipitation);
                     PrintWind(output_file, &weather[i].wind, &weather[i - 1].wind);
@@ -201,12 +206,14 @@ int main(int argc, char** argv) {
                     PrintWind(output_file, &weather[i].wind, NULL);
                 }
                 PrintPressure(&weather[i], output_file);
+                PrintRecommendation(&weather[i], output_file);
                 fprintf(output_file, "\n\n");
+                break;
             case 5:
                 PrintDate(&weather[i], output_file);
                 PrintDayTemperature(weather[i].day_temp.min_val, weather[i].day_temp.max_val, &weather[i], output_file);
-                PrintFeelingTemperature(weather->temp_feels_like.min_val, weather->temp_feels_like.max_val,
-                                        weather->day_temp.min_val, weather->day_temp.max_val, output_file);
+                PrintFeelingTemperature(weather[i].temp_feels_like.min_val, weather[i].temp_feels_like.max_val,
+                                        weather[i].day_temp.min_val, weather[i].day_temp.max_val, output_file);
                 PrintNightTemperature(weather[i].night_temp.min_val, weather[i].night_temp.max_val, &weather[i],
                                       output_file);
                 if (i > 0 && AreConsecutiveDates(&weather[i].date, &weather[i - 1].date)) {
@@ -217,8 +224,9 @@ int main(int argc, char** argv) {
                     PrintPrecipitation(output_file, weather[i].precipitation, NULL);
                 }
                 PrintPressure(&weather[i], output_file);
-                PrintRecomendation(&weather[i], output_file);
+                PrintRecommendation(&weather[i], output_file);
                 fprintf(output_file, "\n\n");
+                break;
         }
 
 
