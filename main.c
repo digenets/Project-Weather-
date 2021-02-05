@@ -15,6 +15,7 @@
 #include "temperature_pinting.h"
 #include "print_pressure.h"
 #include "print_feelling_temperature.h"
+#include "print_recomendation.h"
 
 #define INPUT_MAX_LEN 200
 #define TEST "test"
@@ -131,6 +132,7 @@ int main(int argc, char** argv) {
                     PrintPrecipitation(output_file, weather[i].precipitation, NULL);
                     PrintWind(output_file, &weather[i].wind, NULL);
                 }
+                PrintRecomendation(&weather[i], output_file);
                 fprintf(output_file, "\n\n");
             case 1:
                 PrintDate(&weather[i], output_file);
@@ -147,6 +149,7 @@ int main(int argc, char** argv) {
                     PrintPrecipitation(output_file, weather[i].precipitation, NULL);
                     PrintWind(output_file, &weather[i].wind, NULL);
                 }
+                PrintRecomendation(&weather[i], output_file);
                 fprintf(output_file, "\n\n");
             case 2:
                 PrintDate(&weather[i], output_file);
@@ -164,7 +167,7 @@ int main(int argc, char** argv) {
                     PrintWind(output_file, &weather[i].wind, NULL);
                     PrintPrecipitation(output_file, weather[i].precipitation, NULL);
                 }
-
+                PrintRecomendation(&weather[i], output_file);
                 fprintf(output_file, "\n\n");
             case 3:
                 PrintDate(&weather[i], output_file);
@@ -181,6 +184,7 @@ int main(int argc, char** argv) {
                     PrintWind(output_file, &weather[i].wind, NULL);
                     PrintPrecipitation(output_file, weather[i].precipitation, NULL);
                 }
+                PrintRecomendation(&weather[i], output_file);
                 fprintf(output_file, "\n\n");
             case 4:
                 PrintDate(&weather[i], output_file);
@@ -213,8 +217,10 @@ int main(int argc, char** argv) {
                     PrintPrecipitation(output_file, weather[i].precipitation, NULL);
                 }
                 PrintPressure(&weather[i], output_file);
+                PrintRecomendation(&weather[i], output_file);
                 fprintf(output_file, "\n\n");
         }
+
 
     }
 
