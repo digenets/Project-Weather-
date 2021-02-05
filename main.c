@@ -108,14 +108,13 @@ int main(int argc, char** argv) {
         Test();
     }
 
-    char* path_input = argv[1];
-    FILE* input_file = fopen(path_input, "rt");
+    char* path = argv[1];
+    FILE* input_file = fopen(path, "rt");
     int weather_str_number = 0;
     fscanf(input_file, "%d\n", &weather_str_number);
     WEATHER* weather = ParseInput(input_file, weather_str_number);
 
-    char* path_output = argv[2];
-    FILE* output_file = fopen(path_output, "wt");
+    FILE* output_file = fopen(argv[2], "wt");
     for (int i = 0; i < weather_str_number; ++i) {
         switch (rand()%5) {
             case 0:
